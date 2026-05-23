@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EE0849 Course Links</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --ink: #17202a;
+      --muted: #637083;
+      --line: #d9dee7;
+      --panel: #ffffff;
+      --accent: #0f766e;
+      --accent-soft: #e7f4f2;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    header {
+      background: #17202a;
+      color: #fff;
+      padding: 28px 20px;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(2rem, 6vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.25rem;
+      letter-spacing: 0;
+    }
+
+    .lede {
+      margin: 0;
+      color: #d4dde8;
+    }
+
+    .notice {
+      background: var(--accent-soft);
+      border: 1px solid #b8ddd7;
+      border-radius: 8px;
+      color: #124d48;
+      margin-bottom: 18px;
+      padding: 14px 16px;
+    }
+
+    .weeks {
+      display: grid;
+      gap: 14px;
+    }
+
+    .week {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
+    a.item {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: var(--ink);
+      text-decoration: none;
+      background: #fff;
+    }
+
+    a.item:hover,
+    a.item:focus-visible {
+      border-color: var(--accent);
+      outline: none;
+    }
+
+    .kind {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: #edf0f5;
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 2px 8px;
+    }
+
+    .external {
+      background: #fff9e8;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding: 22px 20px 34px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>EE0849 Course Links</h1>
+      <p class="lede">A student-facing mirror of the course materials links from CATS.</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <p class="notice">This page is intentionally not submitted to search engines. Please access it through the CATS course page.</p>
+    <section class="weeks" aria-label="Course links by week">
+      <article class="week">
+        <h2>Week 1</h2>
+        <div class="links">
+          <a class="item" href="../W01_introduction-spatial-descriptions/W01_introduction-spatial-descriptions_slides.html"><span>Introduction and spatial descriptions slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W01_introduction-spatial-descriptions/W01_introduction-spatial-descriptions_study_sheet.pdf"><span>Study sheet</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W01_introduction-spatial-descriptions/"><span>Week 1 folder</span><span class="kind">Index</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 2</h2>
+        <div class="links">
+          <a class="item" href="../W02_homogeneous-transformations/W02_homogeneous-transformations_slides.html"><span>Homogeneous transformations slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W02_homogeneous-transformations/W02_homogeneous-transformations_study_sheet.pdf"><span>Study sheet</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W02_homogeneous-transformations/W02_homogeneous-transformations_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W02_homogeneous-transformations/W02_homogeneous-transformations_lab1_transform_calculator.ipynb"><span>Transform calculator notebook</span><span class="kind">IPYNB</span></a>
+          <a class="item" href="../W02_homogeneous-transformations/W02_homogeneous-transformations_spatialmath_cheatsheet.ipynb"><span>Spatialmath cheatsheet</span><span class="kind">IPYNB</span></a>
+          <a class="item external" href="https://colab.research.google.com/drive/14hoohFyKUDU-xApWn9Rorp1vZbg1n9PO?usp=sharing"><span>Lab notebook in Colab</span><span class="kind">Colab</span></a>
+          <a class="item external" href="https://colab.research.google.com/drive/1x00695mGzMH5uMnk8-Q-_sdP5g99p8_M?usp=sharing"><span>Cheatsheet in Colab</span><span class="kind">Colab</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 3</h2>
+        <div class="links">
+          <a class="item" href="../W03_forward-kinematics-dh/W03_forward-kinematics-dh_slides.html"><span>Forward kinematics and DH slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W03_forward-kinematics-dh/W03_forward-kinematics-dh_dh_examples.html"><span>DH examples</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W03_forward-kinematics-dh/W03_forward-kinematics-dh_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W03_forward-kinematics-dh/W03_forward-kinematics-dh_lab2_dh_forward_kinematics.ipynb"><span>DH forward kinematics notebook</span><span class="kind">IPYNB</span></a>
+          <a class="item external" href="https://colab.research.google.com/drive/1V_XYPsgEam86P5urwtGO381-u3jFy-9Q?usp=sharing"><span>Lab notebook in Colab</span><span class="kind">Colab</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 4</h2>
+        <div class="links">
+          <a class="item" href="../W04_analytical-inverse-kinematics/W04_analytical-inverse-kinematics_slides.html"><span>Analytical inverse kinematics slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W04_analytical-inverse-kinematics/W04_analytical-inverse-kinematics_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W04_analytical-inverse-kinematics/W04_analytical-inverse-kinematics_lab3_geometric_ik.ipynb"><span>Geometric IK notebook</span><span class="kind">IPYNB</span></a>
+          <a class="item external" href="https://colab.research.google.com/drive/1qyBYQj2wT3R_rgKk-wRe4HntW0lUoI6V?usp=sharing"><span>Lab notebook in Colab</span><span class="kind">Colab</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 5</h2>
+        <div class="links">
+          <a class="item" href="../W05_numerical-inverse-kinematics/W05_numerical-inverse-kinematics_slides.html"><span>Numerical inverse kinematics slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W05_numerical-inverse-kinematics/W05_numerical-inverse-kinematics_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W05_numerical-inverse-kinematics/W05_numerical-inverse-kinematics_notes.pdf"><span>Notes</span><span class="kind">PDF</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 6</h2>
+        <div class="links">
+          <a class="item" href="../W06_trajectory-generation/W06_trajectory-generation_slides.html"><span>Trajectory generation slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W06_trajectory-generation/W06_trajectory-generation_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W06_trajectory-generation/W06_trajectory-generation_notes.pdf"><span>Notes</span><span class="kind">PDF</span></a>
+          <a class="item" href="../resources/fanuc_quick_reference.pdf"><span>Fanuc quick reference</span><span class="kind">PDF</span></a>
+          <a class="item" href="../fanuc_tp_cheatsheet.pdf"><span>Fanuc TP cheatsheet</span><span class="kind">PDF</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 7</h2>
+        <div class="links">
+          <a class="item" href="../W07_industrial-sensors-logic/W07_industrial-sensors-logic_slides.html"><span>Industrial sensors and logic slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W07_industrial-sensors-logic/W07_industrial-sensors-logic_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W07_industrial-sensors-logic/W07_industrial-sensors-logic_notes.pdf"><span>Notes</span><span class="kind">PDF</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 8</h2>
+        <div class="links">
+          <a class="item" href="../W08_calibration-advanced-tp/W08_calibration-advanced-tp_slides.html"><span>Calibration and advanced TP slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W08_calibration-advanced-tp/W08_calibration-advanced-tp_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W08_calibration-advanced-tp/W08_calibration-advanced-tp_lab_roboguide.pdf"><span>RoboGuide lab</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W08_calibration-advanced-tp/W08_calibration-advanced-tp_notes.pdf"><span>Notes</span><span class="kind">PDF</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 9</h2>
+        <div class="links">
+          <a class="item" href="../W09_mobile-robot-kinematics/W09_mobile-robot-kinematics_slides.html"><span>Mobile robot kinematics slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W09_mobile-robot-kinematics/W09_mobile-robot-kinematics_study_sheet.pdf"><span>Study sheet</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W09_mobile-robot-kinematics/W09_mobile-robot-kinematics_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W09_mobile-robot-kinematics/W09_mobile-robot-kinematics_lab8_mobile_robot_kinematics.ipynb"><span>Mobile robot kinematics notebook</span><span class="kind">IPYNB</span></a>
+          <a class="item external" href="https://colab.research.google.com/drive/1fT2BL2Ypdu0ucW9j_f8aaEafNCSbgZeE?usp=sharing"><span>Lab notebook in Colab</span><span class="kind">Colab</span></a>
+          <a class="item external" href="https://colab.research.google.com/drive/1tMIQCco8OYR6lBJWmOkuCaDW2nf2_9Pp?usp=sharing"><span>Practice notebook in Colab</span><span class="kind">Colab</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 10</h2>
+        <div class="links">
+          <a class="item" href="../W10_sensors-autonomy/W10_sensors-autonomy_slides.html"><span>Sensors and autonomy slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W10_sensors-autonomy/W10_sensors-autonomy_slides_chalkboard.html"><span>Chalkboard slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W10_sensors-autonomy/W10_sensors-autonomy_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W10_sensors-autonomy/W10_sensors-autonomy_lab9_sensor_simulation.ipynb"><span>Sensor simulation notebook</span><span class="kind">IPYNB</span></a>
+          <a class="item" href="../W10_sensors-autonomy/lab9_prelab_guide.pdf"><span>Prelab guide</span><span class="kind">PDF</span></a>
+          <a class="item external" href="https://colab.research.google.com/drive/1CUStyYTYteV9Xjkz8tE2DUDXL7a-Pdzb?usp=sharing"><span>Lab notebook in Colab</span><span class="kind">Colab</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 11</h2>
+        <div class="links">
+          <a class="item" href="../W11_path-planning-grid-search/W11_path-planning-grid-search_slides.html"><span>Grid-search path planning slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W11_path-planning-grid-search/W11_path-planning-grid-search_slides_chalkboard.html"><span>Chalkboard slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W11_path-planning-grid-search/W11_path-planning-grid-search_lab.pdf"><span>Lab handout</span><span class="kind">PDF</span></a>
+          <a class="item" href="../W11_path-planning-grid-search/W11_path-planning-grid-search_lab10_path_planning.ipynb"><span>Path planning notebook</span><span class="kind">IPYNB</span></a>
+          <a class="item" href="../W11_path-planning-grid-search/W11_path-planning-grid-search_practice11_dijkstra_astar.ipynb"><span>Dijkstra and A* practice</span><span class="kind">IPYNB</span></a>
+          <a class="item external" href="https://colab.research.google.com/drive/13iJySiRcfUx4JBNE8bstoCy8bLp8DeAl?usp=sharing"><span>Lab notebook in Colab</span><span class="kind">Colab</span></a>
+        </div>
+      </article>
+
+      <article class="week">
+        <h2>Week 12</h2>
+        <div class="links">
+          <a class="item" href="../W12_path-planning-sampling/W12_path-planning-sampling_slides.html"><span>Sampling-based path planning slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W12_path-planning-sampling/W12_path-planning-sampling_slides_chalkboard.html"><span>Chalkboard slides</span><span class="kind">HTML</span></a>
+          <a class="item" href="../W12_path-planning-sampling/W12_path-planning-sampling_practice_mobile_robots.ipynb"><span>Mobile robots practice notebook</span><span class="kind">IPYNB</span></a>
+          <a class="item" href="../assets/code/astar_stepper.html"><span>A* stepper</span><span class="kind">HTML</span></a>
+          <a class="item" href="../assets/code/dijkstra_stepper.html"><span>Dijkstra stepper</span><span class="kind">HTML</span></a>
+          <a class="item" href="../assets/code/rrt_interactive.html"><span>RRT interactive</span><span class="kind">HTML</span></a>
+          <a class="item external" href="https://colab.research.google.com/drive/17G2CDuq1A4mG5rOOZY2uK-26oSDqmcQ5?usp=sharing"><span>Lab notebook in Colab</span><span class="kind">Colab</span></a>
+        </div>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">Source repository remains private. Public content here is limited to rendered student-facing material.</div>
+  </footer>
+</body>
+</html>
