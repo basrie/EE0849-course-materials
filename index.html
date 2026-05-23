@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EE0849 Course Materials</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f8fb;
+      --panel: #ffffff;
+      --text: #17202a;
+      --muted: #5d6978;
+      --line: #d9dee7;
+      --accent: #0f766e;
+      --accent-dark: #115e59;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    header {
+      background: #17202a;
+      color: #ffffff;
+      padding: 32px 20px 28px;
+    }
+
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .term {
+      margin: 0;
+      color: #d4dde8;
+      font-size: 1rem;
+    }
+
+    main {
+      padding: 24px 20px 40px;
+    }
+
+    .notice {
+      background: #eef8f6;
+      border: 1px solid #b8ddd7;
+      border-radius: 8px;
+      color: #124d48;
+      margin-bottom: 20px;
+      padding: 14px 16px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+
+    .week {
+      display: flex;
+      min-height: 118px;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      color: inherit;
+      text-decoration: none;
+      transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+    }
+
+    .week:hover,
+    .week:focus-visible {
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(15, 118, 110, 0.12);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    .week strong {
+      display: block;
+      font-size: 1.05rem;
+    }
+
+    .week span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.92rem;
+      padding: 22px 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>EE0849 Course Materials</h1>
+      <p class="term">Introduction to Robotics, 2025-2026</p>
+    </div>
+  </header>
+  <main class="wrap">
+    <p class="notice">Trial publishing page for student-facing rendered materials.</p>
+    <section class="grid" aria-label="Weekly materials">
+      <a class="week" href="W01_introduction-spatial-descriptions/"><strong>Week 01</strong><span>Introduction and spatial descriptions</span></a>
+      <a class="week" href="W02_homogeneous-transformations/"><strong>Week 02</strong><span>Homogeneous transformations</span></a>
+      <a class="week" href="W03_forward-kinematics-dh/"><strong>Week 03</strong><span>Forward kinematics and DH</span></a>
+      <a class="week" href="W04_analytical-inverse-kinematics/"><strong>Week 04</strong><span>Analytical inverse kinematics</span></a>
+      <a class="week" href="W05_numerical-inverse-kinematics/"><strong>Week 05</strong><span>Numerical inverse kinematics</span></a>
+      <a class="week" href="W06_trajectory-generation/"><strong>Week 06</strong><span>Trajectory generation</span></a>
+      <a class="week" href="W07_industrial-sensors-logic/"><strong>Week 07</strong><span>Industrial sensors and logic</span></a>
+      <a class="week" href="W08_calibration-advanced-tp/"><strong>Week 08</strong><span>Calibration and advanced TP</span></a>
+      <a class="week" href="W09_mobile-robot-kinematics/"><strong>Week 09</strong><span>Mobile robot kinematics</span></a>
+      <a class="week" href="W10_sensors-autonomy/"><strong>Week 10</strong><span>Sensors and autonomy</span></a>
+      <a class="week" href="W11_path-planning-grid-search/"><strong>Week 11</strong><span>Path planning with grid search</span></a>
+      <a class="week" href="W12_path-planning-sampling/"><strong>Week 12</strong><span>Sampling-based path planning</span></a>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap">Published from rendered course materials. Source files remain in the private course repository.</div>
+  </footer>
+</body>
+</html>
