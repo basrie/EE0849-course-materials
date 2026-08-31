@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sigmoid: log-odds → probability</title>
+<style>
+  :root {
+    --c-x: #d62828; --c-y: #2a9d3f; --c-z: #2f6ed3;
+    --c-vec: #7b2cbf; --c-hl: #f39c12; --c-world: #666666;
+    --c-free: #22c55e; --c-free-fill: #dcfce7;
+    --c-occ: #ef4444; --c-occ-fill: #fecaca;
+    --c-robot: #3b82f6; --c-robot-dark: #1e40af;
+    --c-panel: #fafafa; --c-brd: #e2e8f0;
+    --c-text: #1e293b; --c-muted: #64748b; --c-grid: #cbd5e1;
+  }
+  html, body {
+    margin: 0; padding: 0; background: white;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+  }
+  .stage {
+    width: 100%; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px; box-sizing: border-box;
+  }
+  .stage > svg, .stage > .container {
+    width: 100%; height: 100%; max-width: 720px; max-height: 100%;
+  }
+  svg { display: block; }
+  svg text { font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .controls {
+    display: flex; gap: 12px; align-items: center; justify-content: center;
+    padding: 6px 10px; font-size: 13px; color: var(--c-muted);
+  }
+  .controls input[type=range] { width: 220px; accent-color: #f39c12; }
+  .controls .pill {
+    background: var(--c-panel); border: 1px solid var(--c-brd);
+    border-radius: 999px; padding: 4px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+<div class="container" id="sig-root">
+  <svg viewBox="0 0 560 360" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <marker id="ax" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+        <path d="M0,0 L8,3 L0,6" fill="none" stroke="#333" stroke-width="1"/>
+      </marker>
+      <linearGradient id="curveGrad" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#7b2cbf" stop-opacity="0.45"/>
+        <stop offset="0.5" stop-color="#7b2cbf" stop-opacity="1"/>
+        <stop offset="1" stop-color="#7b2cbf" stop-opacity="0.45"/>
+      </linearGradient>
+    </defs>
+    <rect x="80" y="40" width="440" height="240" fill="#fafafa" stroke="#e2e8f0" stroke-width="1"/>
+    <line x1="80" y1="160" x2="520" y2="160" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <line x1="300" y1="40" x2="300" y2="280" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="4,3"/>
+    <line x1="70" y1="280" x2="530" y2="280" stroke="#333" stroke-width="1.5" marker-end="url(#ax)"/>
+    <line x1="80" y1="290" x2="80" y2="30" stroke="#333" stroke-width="1.5" marker-end="url(#ax)"/>
+    <g id="xticks" font-size="11" fill="#475569" text-anchor="middle"></g>
+    <g id="yticks" font-size="11" fill="#475569" text-anchor="end"></g>
+    <text x="300" y="320" text-anchor="middle" font-size="12" fill="#334155">log-odds &#8467;</text>
+    <text x="36" y="160" text-anchor="middle" font-size="11" fill="#475569" transform="rotate(-90,36,160)">probability p</text>
+    <path id="curve" fill="none" stroke="url(#curveGrad)" stroke-width="3"/>
+    <line id="vline" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <line id="hline" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <circle id="dot" r="7" fill="#f39c12" stroke="#fff" stroke-width="2"/>
+    <text id="readout" x="510" y="60" text-anchor="end" font-size="13" font-weight="bold" fill="#7b2cbf"></text>
+    <text id="readout2" x="510" y="78" text-anchor="end" font-size="11" fill="#64748b"></text>
+    <text x="80" y="276" font-size="9" fill="#94a3b8" font-style="italic">certain free</text>
+    <text x="520" y="48" text-anchor="end" font-size="9" fill="#94a3b8" font-style="italic">certain occupied</text>
+  </svg>
+  <div class="controls">
+    <span>Drag to change log-odds &#8467;:</span>
+    <input id="slider" type="range" min="-5" max="5" step="0.1" value="0">
+    <span class="pill" id="lvalue">&#8467; = 0.00</span>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+  const X0=80, X1=520, Y0=40, Y1=280;
+  const lToX = l => X0 + ((l+5)/10) * (X1-X0);
+  const pToY = p => Y1 - p*(Y1-Y0);
+  const sig = l => 1/(1+Math.exp(-l));
+
+  // axes
+  const xticks = [-5,-2.2,0,2.2,5];
+  const yticks = [0,0.1,0.5,0.9,1];
+  const xg = document.getElementById('xticks');
+  const yg = document.getElementById('yticks');
+  xticks.forEach(v=>{ const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x', lToX(v)); t.setAttribute('y', 296); t.textContent = v; xg.appendChild(t);});
+  yticks.forEach(v=>{ const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+    t.setAttribute('x', 72); t.setAttribute('y', pToY(v)+4); t.textContent = v; yg.appendChild(t);});
+
+  // curve
+  let d = '';
+  for(let i=0;i<=200;i++){ const l=-5+i*10/200; const x=lToX(l), y=pToY(sig(l));
+    d += (i?' L':'M')+x.toFixed(1)+' '+y.toFixed(1); }
+  document.getElementById('curve').setAttribute('d', d);
+
+  const slider=document.getElementById('slider');
+  const dot=document.getElementById('dot');
+  const v=document.getElementById('vline'), h=document.getElementById('hline');
+  const r=document.getElementById('readout'), r2=document.getElementById('readout2');
+  const lv=document.getElementById('lvalue');
+  function update(){
+    const l=parseFloat(slider.value), p=sig(l);
+    const x=lToX(l), y=pToY(p);
+    dot.setAttribute('cx', x); dot.setAttribute('cy', y);
+    v.setAttribute('x1', x); v.setAttribute('x2', x); v.setAttribute('y1', y); v.setAttribute('y2', Y1);
+    h.setAttribute('x1', X0); h.setAttribute('x2', x); h.setAttribute('y1', y); h.setAttribute('y2', y);
+    r.textContent = 'p = '+p.toFixed(3);
+    r2.textContent = (p<0.4?'likely free':p>0.6?'likely occupied':'unknown');
+    lv.textContent = 'ℓ = '+l.toFixed(2);
+  }
+  slider.addEventListener('input', update); update();
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="420" viewBox="0 0 520 420" font-family="Arial, sans-serif">
+  <defs>
+    <!-- Free (traveled) cell -->
+    <linearGradient id="freeCellGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0fdf4"/>
+      <stop offset="100%" stop-color="#bbf7d0"/>
+    </linearGradient>
+    <!-- Endpoint (hit) cell -->
+    <linearGradient id="hitCellGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fee2e2"/>
+      <stop offset="100%" stop-color="#fca5a5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Title -->
+  <text x="260" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#1e293b">Bresenham&#8217;s line &#8594; cells touched by the ray</text>
+
+  <!-- =============== GRID =============== -->
+  <!-- 10 cols x 8 rows, cell=42, origin (30, 50) -->
+  <g>
+    <!-- Outer grid frame -->
+    <rect x="30" y="50" width="420" height="336" fill="#ffffff" stroke="#94a3b8" stroke-width="1.2"/>
+
+    <!-- Grid lines -->
+    <g stroke="#e2e8f0" stroke-width="0.6">
+      <line x1="72"  y1="50" x2="72"  y2="386"/>
+      <line x1="114" y1="50" x2="114" y2="386"/>
+      <line x1="156" y1="50" x2="156" y2="386"/>
+      <line x1="198" y1="50" x2="198" y2="386"/>
+      <line x1="240" y1="50" x2="240" y2="386"/>
+      <line x1="282" y1="50" x2="282" y2="386"/>
+      <line x1="324" y1="50" x2="324" y2="386"/>
+      <line x1="366" y1="50" x2="366" y2="386"/>
+      <line x1="408" y1="50" x2="408" y2="386"/>
+      <line x1="30" y1="92"  x2="450" y2="92"/>
+      <line x1="30" y1="134" x2="450" y2="134"/>
+      <line x1="30" y1="176" x2="450" y2="176"/>
+      <line x1="30" y1="218" x2="450" y2="218"/>
+      <line x1="30" y1="260" x2="450" y2="260"/>
+      <line x1="30" y1="302" x2="450" y2="302"/>
+      <line x1="30" y1="344" x2="450" y2="344"/>
+    </g>
+
+    <!-- Bresenham cell mapping:
+         pixel_x = 30 + i*42, pixel_y = 344 - j*42 (row 0 at bottom)
+         cells traversed: (1,1),(2,2),(3,2),(4,3),(5,3),(6,4),(7,5),(8,5),(9,6)
+    -->
+
+    <!-- Traversed cells (all except the last) -->
+    <rect x="72"  y="302" width="42" height="42" fill="url(#freeCellGrad)"/>
+    <rect x="114" y="260" width="42" height="42" fill="url(#freeCellGrad)"/>
+    <rect x="156" y="260" width="42" height="42" fill="url(#freeCellGrad)"/>
+    <rect x="198" y="218" width="42" height="42" fill="url(#freeCellGrad)"/>
+    <rect x="240" y="218" width="42" height="42" fill="url(#freeCellGrad)"/>
+    <rect x="282" y="176" width="42" height="42" fill="url(#freeCellGrad)"/>
+    <rect x="324" y="134" width="42" height="42" fill="url(#freeCellGrad)"/>
+    <rect x="366" y="134" width="42" height="42" fill="url(#freeCellGrad)"/>
+    <!-- Endpoint cell = HIT -->
+    <rect x="408" y="92"  width="42" height="42" fill="url(#hitCellGrad)"/>
+
+    <!-- Continuous mathematical line: start center (93,323) to end center (429,113) -->
+    <line x1="93" y1="323" x2="429" y2="113" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+    <!-- Start point (big green dot) -->
+    <circle cx="93" cy="323" r="7" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+    <!-- End point (big red dot) -->
+    <circle cx="429" cy="113" r="7" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+
+    <!-- Start / Hit labels -->
+    <text x="93" y="370" text-anchor="middle" font-size="14" font-weight="bold" fill="#15803d">Start</text>
+    <text x="429" y="80" text-anchor="middle" font-size="14" font-weight="bold" fill="#b91c1c">Hit</text>
+  </g>
+
+  <!-- =============== Simple legend (bottom) =============== -->
+  <g transform="translate(30, 395)">
+    <rect x="0"   y="0" width="18" height="18" fill="url(#freeCellGrad)" stroke="#cbd5e1" stroke-width="0.6"/>
+    <text x="24" y="14" font-size="12" fill="#15803d" font-weight="600">free</text>
+
+    <rect x="100" y="0" width="18" height="18" fill="url(#hitCellGrad)" stroke="#cbd5e1" stroke-width="0.6"/>
+    <text x="124" y="14" font-size="12" fill="#b91c1c" font-weight="600">hit</text>
+
+    <line x1="180" y1="9" x2="210" y2="9" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,4"/>
+    <text x="216" y="14" font-size="12" fill="#475569">exact ray</text>
+
+    <text x="320" y="14" font-size="12" fill="#64748b" font-style="italic">9 cells from integer math &#8212; one step per grid line crossed</text>
+  </g>
+</svg>

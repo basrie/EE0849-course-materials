@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Polar → Cartesian</title>
+<style>
+  :root {
+    --c-x: #d62828; --c-y: #2a9d3f; --c-z: #2f6ed3;
+    --c-vec: #7b2cbf; --c-hl: #f39c12; --c-world: #666666;
+    --c-free: #22c55e; --c-free-fill: #dcfce7;
+    --c-occ: #ef4444; --c-occ-fill: #fecaca;
+    --c-robot: #3b82f6; --c-robot-dark: #1e40af;
+    --c-panel: #fafafa; --c-brd: #e2e8f0;
+    --c-text: #1e293b; --c-muted: #64748b; --c-grid: #cbd5e1;
+  }
+  html, body {
+    margin: 0; padding: 0; background: white;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+  }
+  .stage {
+    width: 100%; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px; box-sizing: border-box;
+  }
+  .stage > svg, .stage > .container {
+    width: 100%; height: 100%; max-width: 900px; max-height: 100%;
+  }
+  svg { display: block; }
+  svg text { font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .controls {
+    display: flex; gap: 12px; align-items: center; justify-content: center;
+    padding: 6px 10px; font-size: 13px; color: var(--c-muted);
+  }
+  .controls input[type=range] { width: 220px; accent-color: #f39c12; }
+  .controls .pill {
+    background: var(--c-panel); border: 1px solid var(--c-brd);
+    border-radius: 999px; padding: 4px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+<div class="container" id="pc-root">
+  <svg viewBox="0 0 640 320" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <marker id="ax-r" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#d62828"/></marker>
+      <marker id="ax-g" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#2a9d3f"/></marker>
+      <marker id="arr"  markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#333"/></marker>
+    </defs>
+
+    <!-- Left: polar -->
+    <rect x="10" y="10" width="280" height="300" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="150" y="34" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">Polar (r, &alpha;)</text>
+    <g id="polarRays"></g>
+    <line id="refLine" x1="150" y1="170" x2="220" y2="170" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <path id="arc" fill="none" stroke="#f39c12" stroke-width="2"/>
+    <line id="rayLine" stroke="#7b2cbf" stroke-width="2.5"/>
+    <circle id="rayEnd" r="6" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+    <circle cx="150" cy="170" r="6" fill="#3b82f6"/>
+    <text x="150" y="195" text-anchor="middle" font-size="10" fill="#3b82f6">sensor</text>
+    <text id="alphaLbl" font-size="12" font-style="italic" fill="#f39c12" font-weight="bold"></text>
+    <text id="rLbl" font-size="12" font-style="italic" fill="#7b2cbf" font-weight="bold"></text>
+
+    <!-- Center: equations -->
+    <line x1="305" y1="160" x2="355" y2="160" stroke="#333" stroke-width="2.5" marker-end="url(#arr)"/>
+    <text x="330" y="190" text-anchor="middle" font-size="13" font-style="italic" fill="#1e293b">x = r cos &alpha;</text>
+    <text x="330" y="208" text-anchor="middle" font-size="13" font-style="italic" fill="#1e293b">y = r sin &alpha;</text>
+
+    <!-- Right: Cartesian -->
+    <rect x="365" y="10" width="265" height="300" rx="8" fill="#f8fafc" stroke="#e2e8f0"/>
+    <text x="497" y="34" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">Cartesian (x, y)</text>
+    <line x1="385" y1="200" x2="615" y2="200" stroke="#d62828" stroke-width="2" marker-end="url(#ax-r)"/>
+    <line x1="497" y1="295" x2="497" y2="60" stroke="#2a9d3f" stroke-width="2" marker-end="url(#ax-g)"/>
+    <text x="612" y="218" font-size="13" font-style="italic" font-weight="bold" fill="#d62828">x</text>
+    <text x="483" y="68" font-size="13" font-style="italic" font-weight="bold" fill="#2a9d3f">y</text>
+    <circle cx="497" cy="200" r="4" fill="#3b82f6"/>
+    <line id="xGuide" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <line id="yGuide" stroke="#94a3b8" stroke-width="0.8" stroke-dasharray="3,2"/>
+    <circle id="cartDot" r="6" fill="#7b2cbf" stroke="#fff" stroke-width="2"/>
+    <text id="cartLbl" font-size="11" font-style="italic" fill="#1e293b" font-weight="bold"></text>
+  </svg>
+  <div class="controls">
+    <span>Drag the purple dot or use slider:</span>
+    <input id="aSlider" type="range" min="0" max="359" value="62">
+    <span class="pill" id="aVal">&alpha; = 62°</span>
+    <input id="rSlider" type="range" min="20" max="120" value="100">
+    <span class="pill" id="rVal">r = 100</span>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+  const C=[150,170], CC=[497,200], SCALE=2; // cart 1 unit = 2 px
+  const polarRays = [
+    [80,60],[125,55],[170,60],[205,105],[210,170],[205,235],
+    [170,275],[125,280],[80,275],[40,235],[35,170],[40,105]
+  ];
+  const g = document.getElementById('polarRays');
+  polarRays.forEach(p=>{
+    const dl=document.createElementNS('http://www.w3.org/2000/svg','line');
+    dl.setAttribute('x1',C[0]); dl.setAttribute('y1',C[1]);
+    dl.setAttribute('x2',p[0]); dl.setAttribute('y2',p[1]);
+    dl.setAttribute('stroke','#94a3b8'); dl.setAttribute('stroke-width','0.7');
+    dl.setAttribute('stroke-dasharray','3,2'); g.appendChild(dl);
+    const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx',p[0]); dot.setAttribute('cy',p[1]); dot.setAttribute('r',4); dot.setAttribute('fill','#ef4444');
+    g.appendChild(dot);
+  });
+  const aS=document.getElementById('aSlider'), rS=document.getElementById('rSlider');
+  const aV=document.getElementById('aVal'), rV=document.getElementById('rVal');
+  const ray=document.getElementById('rayLine'), end=document.getElementById('rayEnd');
+  const arc=document.getElementById('arc');
+  const alphaLbl=document.getElementById('alphaLbl'), rLbl=document.getElementById('rLbl');
+  const xGuide=document.getElementById('xGuide'), yGuide=document.getElementById('yGuide');
+  const cartDot=document.getElementById('cartDot'), cartLbl=document.getElementById('cartLbl');
+
+  function update(){
+    const a = parseFloat(aS.value)*Math.PI/180;
+    const r = parseFloat(rS.value);
+    const ex = C[0] + r*Math.cos(a), ey = C[1] - r*Math.sin(a);
+    ray.setAttribute('x1',C[0]); ray.setAttribute('y1',C[1]);
+    ray.setAttribute('x2',ex); ray.setAttribute('y2',ey);
+    end.setAttribute('cx',ex); end.setAttribute('cy',ey);
+    // arc
+    const ar=30; const ax2=C[0]+ar*Math.cos(a), ay2=C[1]-ar*Math.sin(a);
+    const sweep = a < Math.PI ? 0 : 1;
+    arc.setAttribute('d', `M ${C[0]+ar},${C[1]} A ${ar},${ar} 0 0,${sweep} ${ax2},${ay2}`);
+    // labels
+    alphaLbl.setAttribute('x', C[0]+34); alphaLbl.setAttribute('y', C[1]-8);
+    alphaLbl.textContent = 'α';
+    rLbl.setAttribute('x', (C[0]+ex)/2 + 6); rLbl.setAttribute('y', (C[1]+ey)/2 - 4);
+    rLbl.textContent = 'r';
+    // cartesian
+    const cx = CC[0] + r*Math.cos(a)*0.9, cy = CC[1] - r*Math.sin(a)*0.9;
+    cartDot.setAttribute('cx', cx); cartDot.setAttribute('cy', cy);
+    xGuide.setAttribute('x1', cx); xGuide.setAttribute('y1', cy); xGuide.setAttribute('x2', cx); xGuide.setAttribute('y2', CC[1]);
+    yGuide.setAttribute('x1', cx); yGuide.setAttribute('y1', cy); yGuide.setAttribute('x2', CC[0]); yGuide.setAttribute('y2', cy);
+    const xv = (r*Math.cos(a)/40).toFixed(2), yv = (r*Math.sin(a)/40).toFixed(2);
+    cartLbl.setAttribute('x', cx+8); cartLbl.setAttribute('y', cy-6);
+    cartLbl.textContent = `(${xv}, ${yv})`;
+    aV.textContent = 'α = '+aS.value+'°';
+    rV.textContent = 'r = '+rS.value;
+  }
+  aS.addEventListener('input',update);
+  rS.addEventListener('input',update);
+  // drag the rayEnd
+  const svg = document.querySelector('#pc-root svg');
+  let drag=false;
+  function pt(e){ const r=svg.getBoundingClientRect(); const x=(e.clientX-r.left)*640/r.width; const y=(e.clientY-r.top)*320/r.height; return [x,y];}
+  end.addEventListener('mousedown', e=>{drag=true;});
+  window.addEventListener('mousemove', e=>{ if(!drag) return; const [x,y]=pt(e);
+    const dx=x-C[0], dy=C[1]-y; const a=Math.atan2(dy,dx); let deg=Math.round(a*180/Math.PI); if(deg<0) deg+=360;
+    aS.value=deg; rS.value=Math.min(120,Math.max(20,Math.round(Math.hypot(dx,dy)))); update();});
+  window.addEventListener('mouseup', ()=>{drag=false;});
+  update();
+})();
+</script>
+
+</body>
+</html>

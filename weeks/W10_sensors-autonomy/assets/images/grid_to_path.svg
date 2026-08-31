@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="420" viewBox="0 0 500 420">
+  <defs>
+    <style>
+      text { font-family: Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!--
+    Grid: 12 columns x 10 rows, cell size 35x35
+    Origin offset: x=40, y=10
+    Cell (col, row): x = 40 + col*35, y = 10 + row*35
+    Cell center: (40 + col*35 + 17.5, 10 + row*35 + 17.5)
+    Row 0 = top, Row 9 = bottom
+
+    Obstacles:
+      - Perimeter walls (row 0, row 9, col 0, col 11)
+      - Horizontal wall: (2,5) (3,5) (4,5) (5,5)
+      - L-shaped: (8,2) (8,3) (8,4) (9,4) (10,4)
+
+    Start: (1,8)  Goal: (10,1)
+
+    Path: (1,8)->(1,7)->(1,6)->(1,5)->(1,4)->(2,4)->(3,4)->(4,4)->(5,4)
+          ->(6,4)->(6,3)->(6,2)->(6,1)->(7,1)->(8,1)->(9,1)->(10,1)
+  -->
+
+  <!-- White background for free cells -->
+  <rect x="40" y="10" width="420" height="350" fill="#ffffff"/>
+
+  <!-- ===== PATH CELLS (light blue, drawn before walls so walls cover if overlapping) ===== -->
+  <rect x="75"  y="255" width="35" height="35" fill="#dbeafe"/><!-- (1,7) -->
+  <rect x="75"  y="220" width="35" height="35" fill="#dbeafe"/><!-- (1,6) -->
+  <rect x="75"  y="185" width="35" height="35" fill="#dbeafe"/><!-- (1,5) -->
+  <rect x="75"  y="150" width="35" height="35" fill="#dbeafe"/><!-- (1,4) -->
+  <rect x="110" y="150" width="35" height="35" fill="#dbeafe"/><!-- (2,4) -->
+  <rect x="145" y="150" width="35" height="35" fill="#dbeafe"/><!-- (3,4) -->
+  <rect x="180" y="150" width="35" height="35" fill="#dbeafe"/><!-- (4,4) -->
+  <rect x="215" y="150" width="35" height="35" fill="#dbeafe"/><!-- (5,4) -->
+  <rect x="250" y="150" width="35" height="35" fill="#dbeafe"/><!-- (6,4) -->
+  <rect x="250" y="115" width="35" height="35" fill="#dbeafe"/><!-- (6,3) -->
+  <rect x="250" y="80"  width="35" height="35" fill="#dbeafe"/><!-- (6,2) -->
+  <rect x="250" y="45"  width="35" height="35" fill="#dbeafe"/><!-- (6,1) -->
+  <rect x="285" y="45"  width="35" height="35" fill="#dbeafe"/><!-- (7,1) -->
+  <rect x="320" y="45"  width="35" height="35" fill="#dbeafe"/><!-- (8,1) -->
+  <rect x="355" y="45"  width="35" height="35" fill="#dbeafe"/><!-- (9,1) -->
+
+  <!-- Start cell (green) -->
+  <rect x="75" y="290" width="35" height="35" fill="#22c55e"/><!-- (1,8) -->
+
+  <!-- Goal cell (red) -->
+  <rect x="390" y="45" width="35" height="35" fill="#ef4444"/><!-- (10,1) -->
+
+  <!-- ===== PERIMETER WALLS ===== -->
+  <!-- Top row (row 0) -->
+  <rect x="40"  y="10" width="420" height="35" fill="#1e293b"/>
+
+  <!-- Bottom row (row 9) -->
+  <rect x="40"  y="325" width="420" height="35" fill="#1e293b"/>
+
+  <!-- Left column (col 0), rows 1-8 -->
+  <rect x="40" y="45" width="35" height="280" fill="#1e293b"/>
+
+  <!-- Right column (col 11), rows 1-8 -->
+  <rect x="425" y="45" width="35" height="280" fill="#1e293b"/>
+
+  <!-- ===== INTERNAL OBSTACLES ===== -->
+  <!-- Horizontal wall: (2,5) (3,5) (4,5) (5,5) -->
+  <rect x="110" y="185" width="140" height="35" fill="#1e293b"/>
+
+  <!-- L-shaped obstacle: vertical (8,2)(8,3)(8,4) + horizontal (9,4)(10,4) -->
+  <rect x="320" y="80"  width="35" height="105" fill="#1e293b"/><!-- col 8, rows 2-4 -->
+  <rect x="355" y="150" width="70" height="35"  fill="#1e293b"/><!-- cols 9-10, row 4 -->
+
+  <!-- ===== GRID LINES ===== -->
+  <g stroke="#cccccc" stroke-width="0.5" fill="none">
+    <!-- Vertical lines (13 lines for 12 columns) -->
+    <line x1="40"  y1="10" x2="40"  y2="360"/>
+    <line x1="75"  y1="10" x2="75"  y2="360"/>
+    <line x1="110" y1="10" x2="110" y2="360"/>
+    <line x1="145" y1="10" x2="145" y2="360"/>
+    <line x1="180" y1="10" x2="180" y2="360"/>
+    <line x1="215" y1="10" x2="215" y2="360"/>
+    <line x1="250" y1="10" x2="250" y2="360"/>
+    <line x1="285" y1="10" x2="285" y2="360"/>
+    <line x1="320" y1="10" x2="320" y2="360"/>
+    <line x1="355" y1="10" x2="355" y2="360"/>
+    <line x1="390" y1="10" x2="390" y2="360"/>
+    <line x1="425" y1="10" x2="425" y2="360"/>
+    <line x1="460" y1="10" x2="460" y2="360"/>
+    <!-- Horizontal lines (11 lines for 10 rows) -->
+    <line x1="40" y1="10"  x2="460" y2="10"/>
+    <line x1="40" y1="45"  x2="460" y2="45"/>
+    <line x1="40" y1="80"  x2="460" y2="80"/>
+    <line x1="40" y1="115" x2="460" y2="115"/>
+    <line x1="40" y1="150" x2="460" y2="150"/>
+    <line x1="40" y1="185" x2="460" y2="185"/>
+    <line x1="40" y1="220" x2="460" y2="220"/>
+    <line x1="40" y1="255" x2="460" y2="255"/>
+    <line x1="40" y1="290" x2="460" y2="290"/>
+    <line x1="40" y1="325" x2="460" y2="325"/>
+    <line x1="40" y1="360" x2="460" y2="360"/>
+  </g>
+
+  <!-- ===== PATH LINE (bold blue connecting cell centers) ===== -->
+  <!-- (1,8) -> (1,7) -> ... -> (10,1) -->
+  <polyline
+    fill="none"
+    stroke="#3b82f6"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    points="
+      92.5,307.5
+      92.5,272.5
+      92.5,237.5
+      92.5,202.5
+      92.5,167.5
+      127.5,167.5
+      162.5,167.5
+      197.5,167.5
+      232.5,167.5
+      267.5,167.5
+      267.5,132.5
+      267.5,97.5
+      267.5,62.5
+      302.5,62.5
+      337.5,62.5
+      372.5,62.5
+      407.5,62.5
+    "
+  />
+
+  <!-- Small dots at path waypoints for clarity -->
+  <g fill="#3b82f6">
+    <circle cx="92.5"  cy="307.5" r="3"/>
+    <circle cx="92.5"  cy="272.5" r="2"/>
+    <circle cx="92.5"  cy="237.5" r="2"/>
+    <circle cx="92.5"  cy="202.5" r="2"/>
+    <circle cx="92.5"  cy="167.5" r="2"/>
+    <circle cx="127.5" cy="167.5" r="2"/>
+    <circle cx="162.5" cy="167.5" r="2"/>
+    <circle cx="197.5" cy="167.5" r="2"/>
+    <circle cx="232.5" cy="167.5" r="2"/>
+    <circle cx="267.5" cy="167.5" r="2"/>
+    <circle cx="267.5" cy="132.5" r="2"/>
+    <circle cx="267.5" cy="97.5"  r="2"/>
+    <circle cx="267.5" cy="62.5"  r="2"/>
+    <circle cx="302.5" cy="62.5"  r="2"/>
+    <circle cx="337.5" cy="62.5"  r="2"/>
+    <circle cx="372.5" cy="62.5"  r="2"/>
+    <circle cx="407.5" cy="62.5"  r="3"/>
+  </g>
+
+  <!-- ===== LABELS ===== -->
+  <text x="92.5" y="340" text-anchor="middle" font-size="11" font-weight="bold" fill="#16a34a">Start</text>
+  <text x="407.5" y="92" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">Goal</text>
+
+  <!-- ===== CAPTION ===== -->
+  <text x="250" y="395" text-anchor="middle" font-size="11" fill="#64748b">A* search finds the shortest path (W11)</text>
+</svg>

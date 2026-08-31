@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The sensor noise problem</title>
+<style>
+  :root {
+    --c-x: #d62828; --c-y: #2a9d3f; --c-z: #2f6ed3;
+    --c-vec: #7b2cbf; --c-hl: #f39c12; --c-world: #666666;
+    --c-free: #22c55e; --c-free-fill: #dcfce7;
+    --c-occ: #ef4444; --c-occ-fill: #fecaca;
+    --c-robot: #3b82f6; --c-robot-dark: #1e40af;
+    --c-panel: #fafafa; --c-brd: #e2e8f0;
+    --c-text: #1e293b; --c-muted: #64748b; --c-grid: #cbd5e1;
+  }
+  html, body {
+    margin: 0; padding: 0; background: white;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+  }
+  .stage {
+    width: 100%; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px; box-sizing: border-box;
+  }
+  .stage > svg, .stage > .container {
+    width: 100%; height: 100%; max-width: 900px; max-height: 100%;
+  }
+  svg { display: block; }
+  svg text { font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .controls {
+    display: flex; gap: 12px; align-items: center; justify-content: center;
+    padding: 6px 10px; font-size: 13px; color: var(--c-muted);
+  }
+  .controls input[type=range] { width: 220px; accent-color: #f39c12; }
+  .controls .pill {
+    background: var(--c-panel); border: 1px solid var(--c-brd);
+    border-radius: 999px; padding: 4px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="stage"><svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 340" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="arrFree" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#16a34a"/>
+    </marker>
+    <marker id="arrHit" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#dc2626"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="260" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">Two scans of the same cell disagree</text>
+
+  <!-- ================ GRID ================ -->
+  <!-- 8 cols x 5 rows, cell = 36 px, starting at (120, 50) -->
+  <g transform="translate(120, 50)">
+    <!-- Cell backgrounds (unknown = light gray) -->
+    <g fill="#f1f5f9" stroke="#cbd5e1" stroke-width="0.7">
+      <!-- 8 x 5 grid -->
+      <rect x="0"   y="0"   width="36" height="36"/><rect x="36"  y="0"   width="36" height="36"/><rect x="72"  y="0"   width="36" height="36"/><rect x="108" y="0"   width="36" height="36"/><rect x="144" y="0"   width="36" height="36"/><rect x="180" y="0"   width="36" height="36"/><rect x="216" y="0"   width="36" height="36"/><rect x="252" y="0"   width="36" height="36"/>
+      <rect x="0"   y="36"  width="36" height="36"/><rect x="36"  y="36"  width="36" height="36"/><rect x="72"  y="36"  width="36" height="36"/><rect x="108" y="36"  width="36" height="36"/><rect x="144" y="36"  width="36" height="36"/><rect x="180" y="36"  width="36" height="36"/><rect x="216" y="36"  width="36" height="36"/><rect x="252" y="36"  width="36" height="36"/>
+      <rect x="0"   y="72"  width="36" height="36"/><rect x="36"  y="72"  width="36" height="36"/><rect x="72"  y="72"  width="36" height="36"/><rect x="108" y="72"  width="36" height="36"/><rect x="144" y="72"  width="36" height="36"/><rect x="180" y="72"  width="36" height="36"/><rect x="216" y="72"  width="36" height="36"/><rect x="252" y="72"  width="36" height="36"/>
+      <rect x="0"   y="108" width="36" height="36"/><rect x="36"  y="108" width="36" height="36"/><rect x="72"  y="108" width="36" height="36"/><rect x="108" y="108" width="36" height="36"/><rect x="144" y="108" width="36" height="36"/><rect x="180" y="108" width="36" height="36"/><rect x="216" y="108" width="36" height="36"/><rect x="252" y="108" width="36" height="36"/>
+      <rect x="0"   y="144" width="36" height="36"/><rect x="36"  y="144" width="36" height="36"/><rect x="72"  y="144" width="36" height="36"/><rect x="108" y="144" width="36" height="36"/><rect x="144" y="144" width="36" height="36"/><rect x="180" y="144" width="36" height="36"/><rect x="216" y="144" width="36" height="36"/><rect x="252" y="144" width="36" height="36"/>
+    </g>
+
+    <!-- Contested cell at col 5, row 2 -> (180, 72) -->
+    <rect x="180" y="72" width="36" height="36" fill="#fef3c7" stroke="#f39c12" stroke-width="2.5"/>
+
+    <!-- "Cells along scan 1 ray" shaded faint green to show Scan 1 claims they're free (including contested cell at end) -->
+    <!-- Ray 1 passes through the contested cell on its way to a farther endpoint -->
+    <!-- Draw a faint green tint along row 2 up to col 7 -->
+    <rect x="72"  y="72" width="36" height="36" fill="#dcfce7" fill-opacity="0.55"/>
+    <rect x="108" y="72" width="36" height="36" fill="#dcfce7" fill-opacity="0.55"/>
+    <rect x="144" y="72" width="36" height="36" fill="#dcfce7" fill-opacity="0.55"/>
+
+    <!-- Cells along scan 2 ray shaded faint red to show it ends at the contested cell -->
+    <rect x="180" y="144" width="36" height="36" fill="#fee2e2" fill-opacity="0.55"/>
+    <rect x="180" y="108" width="36" height="36" fill="#fee2e2" fill-opacity="0.55"/>
+
+    <!-- Question mark inside contested cell -->
+    <text x="198" y="98" text-anchor="middle" font-size="22" font-weight="bold" font-style="italic" fill="#b45309">?</text>
+
+    <!-- "Cell (7,3)" label above the contested cell -->
+    <text x="198" y="62" text-anchor="middle" font-size="10" fill="#475569" font-style="italic">cell (5, 2)</text>
+  </g>
+
+  <!-- ================ SCAN 1 (left side): robot position A ================ -->
+  <!-- Robot A at grid col 1.5, row 2 (center) -> world (120 + 54, 50 + 90) = (174, 140) -->
+  <!-- But we want the robot outside / on the left. Place robot at (80, 140), ray enters grid and passes through row 2 -->
+  <g>
+    <!-- Robot A -->
+    <circle cx="75" cy="140" r="12" fill="#3b82f6" stroke="#1e40af" stroke-width="1.5"/>
+    <text x="75" y="144" text-anchor="middle" font-size="10" fill="white" font-weight="bold">A</text>
+
+    <!-- Scan 1 ray: robot A -> passes through contested cell at row 2 col 5 -->
+    <!-- Ray goes from (87, 140) to (317, 140) — stops at right wall-like limit -->
+    <!-- Actually contested cell center: (120+198, 50+90) = (318, 140) -->
+    <!-- Let ray end just past the contested cell at x=360 -->
+    <line x1="87" y1="140" x2="345" y2="140" stroke="#16a34a" stroke-width="2.2" marker-end="url(#arrFree)" opacity="0.9"/>
+
+    <!-- Scan 1 label -->
+    <rect x="10" y="168" width="130" height="40" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2"/>
+    <text x="75" y="184" text-anchor="middle" font-size="11" font-weight="bold" fill="#15803d">Scan 1 (robot at A)</text>
+    <text x="75" y="200" text-anchor="middle" font-size="10" fill="#15803d">ray passes through cell</text>
+    <text x="75" y="213" text-anchor="middle" font-size="10" fill="#15803d">&#8594; cell is <tspan font-weight="bold">free</tspan></text>
+  </g>
+
+  <!-- ================ SCAN 2: robot position B (below) ================ -->
+  <g>
+    <!-- Robot B below the grid -->
+    <circle cx="338" cy="290" r="12" fill="#3b82f6" stroke="#1e40af" stroke-width="1.5"/>
+    <text x="338" y="294" text-anchor="middle" font-size="10" fill="white" font-weight="bold">B</text>
+
+    <!-- Scan 2 ray: robot B -> hits contested cell at (318, 140) from below -->
+    <!-- Start from robot edge (338, 278), end at contested cell center (318, 140) -->
+    <line x1="336" y1="278" x2="319" y2="145" stroke="#dc2626" stroke-width="2.2" marker-end="url(#arrHit)" opacity="0.9"/>
+
+    <!-- Scan 2 label -->
+    <rect x="380" y="258" width="130" height="54" rx="6" fill="#fef2f2" stroke="#dc2626" stroke-width="1.2"/>
+    <text x="445" y="274" text-anchor="middle" font-size="11" font-weight="bold" fill="#b91c1c">Scan 2 (robot at B)</text>
+    <text x="445" y="290" text-anchor="middle" font-size="10" fill="#b91c1c">ray <tspan font-weight="bold">hits</tspan> the cell</text>
+    <text x="445" y="303" text-anchor="middle" font-size="10" fill="#b91c1c">&#8594; cell is <tspan font-weight="bold">occupied</tspan></text>
+  </g>
+
+  <!-- ================ Conflict callout ================ -->
+  <g>
+    <!-- Dashed connector from contested cell to conflict text -->
+    <line x1="318" y1="90" x2="430" y2="40" stroke="#f39c12" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <!-- Conflict label -->
+    <rect x="370" y="22" width="140" height="30" rx="6" fill="#fffbeb" stroke="#f39c12" stroke-width="1.4"/>
+    <text x="440" y="42" text-anchor="middle" font-size="11" font-weight="bold" fill="#b45309">Which do we trust?</text>
+  </g>
+</svg></div>
+
+</body>
+</html>

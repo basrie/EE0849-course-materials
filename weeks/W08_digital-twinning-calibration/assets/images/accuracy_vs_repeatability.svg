@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 250">
+  <rect width="700" height="250" fill="#fafafa"/>
+
+  <text x="350" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">Accuracy vs Repeatability</text>
+
+  <!-- High Accuracy, High Repeatability -->
+  <g transform="translate(50, 50)">
+    <rect x="0" y="0" width="140" height="170" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#166534">High Accuracy</text>
+    <text x="70" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#166534">High Repeatability</text>
+
+    <!-- Target -->
+    <circle cx="70" cy="100" r="35" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="25" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="15" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="5" fill="#ef4444"/>
+
+    <!-- Points clustered at center -->
+    <circle cx="68" cy="98" r="4" fill="#3b82f6"/>
+    <circle cx="72" cy="101" r="4" fill="#3b82f6"/>
+    <circle cx="70" cy="96" r="4" fill="#3b82f6"/>
+    <circle cx="73" cy="99" r="4" fill="#3b82f6"/>
+    <circle cx="69" cy="102" r="4" fill="#3b82f6"/>
+
+    <text x="70" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Ideal (calibrated)</text>
+  </g>
+
+  <!-- High Accuracy, Low Repeatability -->
+  <g transform="translate(210, 50)">
+    <rect x="0" y="0" width="140" height="170" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#92400e">High Accuracy</text>
+    <text x="70" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#92400e">Low Repeatability</text>
+
+    <!-- Target -->
+    <circle cx="70" cy="100" r="35" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="25" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="15" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="5" fill="#ef4444"/>
+
+    <!-- Points scattered around center -->
+    <circle cx="55" cy="85" r="4" fill="#3b82f6"/>
+    <circle cx="85" cy="110" r="4" fill="#3b82f6"/>
+    <circle cx="60" cy="115" r="4" fill="#3b82f6"/>
+    <circle cx="80" cy="90" r="4" fill="#3b82f6"/>
+    <circle cx="70" cy="105" r="4" fill="#3b82f6"/>
+
+    <text x="70" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Rare condition</text>
+  </g>
+
+  <!-- Low Accuracy, High Repeatability -->
+  <g transform="translate(370, 50)">
+    <rect x="0" y="0" width="140" height="170" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1e40af">Low Accuracy</text>
+    <text x="70" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1e40af">High Repeatability</text>
+
+    <!-- Target -->
+    <circle cx="70" cy="100" r="35" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="25" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="15" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="5" fill="#ef4444"/>
+
+    <!-- Points clustered but offset -->
+    <circle cx="90" cy="80" r="4" fill="#3b82f6"/>
+    <circle cx="93" cy="83" r="4" fill="#3b82f6"/>
+    <circle cx="88" cy="78" r="4" fill="#3b82f6"/>
+    <circle cx="91" cy="76" r="4" fill="#3b82f6"/>
+    <circle cx="94" cy="81" r="4" fill="#3b82f6"/>
+
+    <text x="70" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Typical industrial robot</text>
+  </g>
+
+  <!-- Low Accuracy, Low Repeatability -->
+  <g transform="translate(530, 50)">
+    <rect x="0" y="0" width="140" height="170" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+    <text x="70" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#991b1b">Low Accuracy</text>
+    <text x="70" y="40" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#991b1b">Low Repeatability</text>
+
+    <!-- Target -->
+    <circle cx="70" cy="100" r="35" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="25" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="15" fill="none" stroke="#ccc" stroke-width="1"/>
+    <circle cx="70" cy="100" r="5" fill="#ef4444"/>
+
+    <!-- Points scattered and offset -->
+    <circle cx="45" cy="75" r="4" fill="#3b82f6"/>
+    <circle cx="95" cy="120" r="4" fill="#3b82f6"/>
+    <circle cx="50" cy="130" r="4" fill="#3b82f6"/>
+    <circle cx="100" cy="80" r="4" fill="#3b82f6"/>
+    <circle cx="85" cy="70" r="4" fill="#3b82f6"/>
+
+    <text x="70" y="160" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Poor mechanism</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(280, 230)">
+    <circle cx="10" cy="5" r="4" fill="#ef4444"/>
+    <text x="20" y="9" font-family="Arial, sans-serif" font-size="10" fill="#666">Target</text>
+    <circle cx="80" cy="5" r="4" fill="#3b82f6"/>
+    <text x="90" y="9" font-family="Arial, sans-serif" font-size="10" fill="#666">Actual positions</text>
+  </g>
+</svg>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bresenham rasterization</title>
+<style>
+  :root {
+    --c-x: #d62828; --c-y: #2a9d3f; --c-z: #2f6ed3;
+    --c-vec: #7b2cbf; --c-hl: #f39c12; --c-world: #666666;
+    --c-free: #22c55e; --c-free-fill: #dcfce7;
+    --c-occ: #ef4444; --c-occ-fill: #fecaca;
+    --c-robot: #3b82f6; --c-robot-dark: #1e40af;
+    --c-panel: #fafafa; --c-brd: #e2e8f0;
+    --c-text: #1e293b; --c-muted: #64748b; --c-grid: #cbd5e1;
+  }
+  html, body {
+    margin: 0; padding: 0; background: white;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+  }
+  .stage {
+    width: 100%; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px; box-sizing: border-box;
+  }
+  .stage > svg, .stage > .container {
+    width: 100%; height: 100%; max-width: 780px; max-height: 100%;
+  }
+  svg { display: block; }
+  svg text { font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .controls {
+    display: flex; gap: 12px; align-items: center; justify-content: center;
+    padding: 6px 10px; font-size: 13px; color: var(--c-muted);
+  }
+  .controls input[type=range] { width: 220px; accent-color: #f39c12; }
+  .controls .pill {
+    background: var(--c-panel); border: 1px solid var(--c-brd);
+    border-radius: 999px; padding: 4px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+<div class="container" id="bg-root">
+  <svg viewBox="0 0 540 420" preserveAspectRatio="xMidYMid meet">
+    <text x="270" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">Bresenham rasterization (drag the red endpoint)</text>
+    <g id="cellsBg"></g>
+    <g id="cellsHit"></g>
+    <g id="lines"></g>
+    <line id="ray" stroke="#ef4444" stroke-width="2" stroke-dasharray="6,3"/>
+    <circle id="robot" cx="60" cy="340" r="9" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+    <text x="60" y="370" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e40af">Robot</text>
+    <circle id="end" cx="380" cy="100" r="9" fill="#dc2626" stroke="#7f1d1d" stroke-width="2" style="cursor:grab"/>
+    <text id="endLbl" x="380" y="86" text-anchor="middle" font-size="11" font-weight="bold" fill="#dc2626">Endpoint</text>
+    <text id="info" x="510" y="60" text-anchor="end" font-size="11" fill="#475569"></text>
+  </svg>
+</div>
+</div>
+
+<script>
+(function(){
+  const X0=40, Y0=40, S=40, COLS=12, ROWS=8;
+  const cellsBg=document.getElementById('cellsBg');
+  const cellsHit=document.getElementById('cellsHit');
+  const lines=document.getElementById('lines');
+  // grid background
+  for(let i=0;i<COLS;i++) for(let j=0;j<ROWS;j++){
+    const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x',X0+i*S); r.setAttribute('y',Y0+j*S);
+    r.setAttribute('width',S); r.setAttribute('height',S);
+    r.setAttribute('fill','#ffffff'); r.setAttribute('stroke','#e2e8f0'); r.setAttribute('stroke-width','0.8');
+    cellsBg.appendChild(r);
+  }
+  function bres(x0,y0,x1,y1){
+    const out=[]; let dx=Math.abs(x1-x0), dy=-Math.abs(y1-y0);
+    let sx=x0<x1?1:-1, sy=y0<y1?1:-1; let err=dx+dy;
+    let x=x0, y=y0;
+    while(true){ out.push([x,y]);
+      if(x===x1 && y===y1) break;
+      const e2=2*err;
+      if(e2>=dy){err+=dy; x+=sx;}
+      if(e2<=dx){err+=dx; y+=sy;}
+      if(out.length>200) break;
+    }
+    return out;
+  }
+  function pix2cell(px,py){ return [Math.floor((px-X0)/S), Math.floor((py-Y0)/S)]; }
+  function cell2px(i,j){ return [X0+i*S, Y0+j*S]; }
+  const robot=document.getElementById('robot'), end=document.getElementById('end'), ray=document.getElementById('ray');
+  const info=document.getElementById('info'), endLbl=document.getElementById('endLbl');
+  function update(){
+    cellsHit.innerHTML='';
+    const [rx,ry]=[parseFloat(robot.getAttribute('cx')),parseFloat(robot.getAttribute('cy'))];
+    const [ex,ey]=[parseFloat(end.getAttribute('cx')),parseFloat(end.getAttribute('cy'))];
+    const [ri,rj]=pix2cell(rx,ry); const [ei,ej]=pix2cell(ex,ey);
+    const cells=bres(ri,rj,ei,ej);
+    cells.forEach((c,k)=>{ const [i,j]=c; if(i<0||j<0||i>=COLS||j>=ROWS) return;
+      const [px,py]=cell2px(i,j);
+      const r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+      r.setAttribute('x',px); r.setAttribute('y',py); r.setAttribute('width',S); r.setAttribute('height',S);
+      const last = (k===cells.length-1);
+      r.setAttribute('fill', last?'#fecaca':'#dcfce7');
+      r.setAttribute('stroke', last?'#ef4444':'#22c55e');
+      r.setAttribute('stroke-width', last?'1.5':'1.0');
+      cellsHit.appendChild(r);
+      const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',px+S/2); t.setAttribute('y',py+S/2+4);
+      t.setAttribute('text-anchor','middle'); t.setAttribute('font-size','12');
+      t.setAttribute('font-weight','bold');
+      t.setAttribute('fill', last?'#dc2626':'#16a34a');
+      t.textContent = last?'O':'F';
+      cellsHit.appendChild(t);
+    });
+    ray.setAttribute('x1',rx); ray.setAttribute('y1',ry); ray.setAttribute('x2',ex); ray.setAttribute('y2',ey);
+    endLbl.setAttribute('x',ex); endLbl.setAttribute('y',ey-18);
+    info.textContent = `${cells.length-1} free cells, 1 occupied`;
+  }
+  // drag endpoint
+  const svg=document.querySelector('#bg-root svg');
+  let drag=false;
+  function pt(e){const r=svg.getBoundingClientRect(); return [(e.clientX-r.left)*540/r.width,(e.clientY-r.top)*420/r.height];}
+  end.addEventListener('mousedown', ()=>{drag=true; end.style.cursor='grabbing';});
+  window.addEventListener('mousemove', e=>{ if(!drag) return; const [x,y]=pt(e);
+    const xC=Math.max(X0+S/2,Math.min(X0+COLS*S-S/2,x));
+    const yC=Math.max(Y0+S/2,Math.min(Y0+ROWS*S-S/2,y));
+    end.setAttribute('cx',xC); end.setAttribute('cy',yC); update();});
+  window.addEventListener('mouseup', ()=>{drag=false; end.style.cursor='grab';});
+  update();
+})();
+</script>
+
+</body>
+</html>

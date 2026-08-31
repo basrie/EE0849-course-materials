@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 320">
+  <defs>
+    <marker id="arr1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#333"/>
+    </marker>
+  </defs>
+
+  <rect width="450" height="320" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="225" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Robot I/O System Overview</text>
+
+  <!-- Robot Controller (center) -->
+  <rect x="150" y="100" width="150" height="120" rx="8" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text x="225" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">FANUC</text>
+  <text x="225" y="148" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">Controller</text>
+  <text x="225" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#dbeafe">DI[1-8]  DO[1-8]</text>
+  <text x="225" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#dbeafe">RI[1-8]  RO[1-8]</text>
+  <text x="225" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#dbeafe">UI[1-18] UO[1-10]</text>
+
+  <!-- Inputs (left side) -->
+  <rect x="10" y="60" width="100" height="45" rx="5" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="60" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Sensors</text>
+  <text x="60" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#dcfce7">Proximity, Photo</text>
+
+  <rect x="10" y="115" width="100" height="45" rx="5" fill="#22c55e" stroke="#16a34a" stroke-width="1.5"/>
+  <text x="60" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Switches</text>
+  <text x="60" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#dcfce7">Limit, Pressure</text>
+
+  <rect x="10" y="170" width="100" height="45" rx="5" fill="#ef4444" stroke="#dc2626" stroke-width="1.5"/>
+  <text x="60" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Safety</text>
+  <text x="60" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#fee2e2">E-Stop, Curtain</text>
+
+  <!-- Outputs (right side) -->
+  <rect x="340" y="60" width="100" height="45" rx="5" fill="#f97316" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="390" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Gripper</text>
+  <text x="390" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#ffedd5">Solenoid Valve</text>
+
+  <rect x="340" y="115" width="100" height="45" rx="5" fill="#f97316" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="390" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Conveyor</text>
+  <text x="390" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#ffedd5">Motor Control</text>
+
+  <rect x="340" y="170" width="100" height="45" rx="5" fill="#f97316" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="390" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="white">Indicators</text>
+  <text x="390" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#ffedd5">Lights, Alarms</text>
+
+  <!-- Arrows - Inputs -->
+  <line x1="110" y1="82" x2="145" y2="140" stroke="#22c55e" stroke-width="2" marker-end="url(#arr1)"/>
+  <line x1="110" y1="137" x2="145" y2="155" stroke="#22c55e" stroke-width="2" marker-end="url(#arr1)"/>
+  <line x1="110" y1="192" x2="145" y2="175" stroke="#ef4444" stroke-width="2" marker-end="url(#arr1)"/>
+
+  <!-- Arrows - Outputs -->
+  <line x1="305" y1="140" x2="335" y2="82" stroke="#f97316" stroke-width="2" marker-end="url(#arr1)"/>
+  <line x1="305" y1="155" x2="335" y2="137" stroke="#f97316" stroke-width="2" marker-end="url(#arr1)"/>
+  <line x1="305" y1="175" x2="335" y2="192" stroke="#f97316" stroke-width="2" marker-end="url(#arr1)"/>
+
+  <!-- Labels -->
+  <text x="60" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#22c55e">INPUTS</text>
+  <text x="390" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#f97316">OUTPUTS</text>
+
+  <!-- Bottom note -->
+  <rect x="75" y="250" width="300" height="55" rx="5" fill="#e0e7ff" stroke="#6366f1"/>
+  <text x="225" y="272" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4338ca">Digital I/O: Simple ON/OFF (1/0) signals</text>
+  <text x="225" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#4338ca">Standard: 24V DC industrial voltage</text>
+</svg>

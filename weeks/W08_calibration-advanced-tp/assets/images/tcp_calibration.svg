@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 30 300 250" width="550" height="458">
+
+  <!-- Fixed reference point (pin) -->
+  <circle cx="175" cy="140" r="6" fill="#ef4444" stroke="#dc2626" stroke-width="2"/>
+  <line x1="175" y1="146" x2="175" y2="180" stroke="#ef4444" stroke-width="3"/>
+  <rect x="165" y="180" width="20" height="10" fill="#94a3b8"/>
+  <text x="175" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ef4444">Reference Pin</text>
+
+  <!-- Robot approach 1 (top-left) -->
+  <g transform="translate(80, 70)">
+    <line x1="0" y1="0" x2="30" y2="30" stroke="#3b82f6" stroke-width="4"/>
+    <line x1="30" y1="30" x2="65" y2="40" stroke="#3b82f6" stroke-width="3"/>
+    <circle cx="65" cy="40" r="5" fill="#3b82f6"/>
+    <line x1="65" y1="40" x2="95" y2="70" stroke="#22c55e" stroke-width="2" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- Robot approach 2 (top-right) -->
+  <g transform="translate(200, 60)">
+    <line x1="70" y1="0" x2="50" y2="25" stroke="#3b82f6" stroke-width="4"/>
+    <line x1="50" y1="25" x2="20" y2="35" stroke="#3b82f6" stroke-width="3"/>
+    <circle cx="20" cy="35" r="5" fill="#3b82f6"/>
+    <line x1="20" y1="35" x2="-45" y2="80" stroke="#22c55e" stroke-width="2" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- Robot approach 3 (bottom-left) -->
+  <g transform="translate(60, 170)">
+    <line x1="0" y1="50" x2="25" y2="25" stroke="#3b82f6" stroke-width="4"/>
+    <line x1="25" y1="25" x2="60" y2="10" stroke="#3b82f6" stroke-width="3"/>
+    <circle cx="60" cy="10" r="5" fill="#3b82f6"/>
+    <line x1="60" y1="10" x2="115" y2="-30" stroke="#22c55e" stroke-width="2" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- Robot approach 4 (bottom-right) -->
+  <g transform="translate(210, 180)">
+    <line x1="70" y1="40" x2="45" y2="15" stroke="#3b82f6" stroke-width="4"/>
+    <line x1="45" y1="15" x2="10" y2="0" stroke="#3b82f6" stroke-width="3"/>
+    <circle cx="10" cy="0" r="5" fill="#3b82f6"/>
+    <line x1="10" y1="0" x2="-35" y2="-40" stroke="#22c55e" stroke-width="2" stroke-dasharray="3,2"/>
+  </g>
+
+  <!-- Orientation labels -->
+  <text x="90" y="55" font-family="Arial, sans-serif" font-size="10" fill="#3b82f6">Pose 1</text>
+  <text x="250" y="50" font-family="Arial, sans-serif" font-size="10" fill="#3b82f6">Pose 2</text>
+  <text x="50" y="235" font-family="Arial, sans-serif" font-size="10" fill="#3b82f6">Pose 3</text>
+  <text x="260" y="235" font-family="Arial, sans-serif" font-size="10" fill="#3b82f6">Pose 4</text>
+
+  <!-- Explanation box -->
+  <rect x="55" y="245" width="240" height="28" rx="5" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+  <text x="175" y="263" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#166534">All poses touch same point → Calculate TCP offset</text>
+</svg>

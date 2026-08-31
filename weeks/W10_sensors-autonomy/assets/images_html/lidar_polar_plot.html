@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LiDAR polar plot</title>
+<style>
+  :root {
+    --c-x: #d62828; --c-y: #2a9d3f; --c-z: #2f6ed3;
+    --c-vec: #7b2cbf; --c-hl: #f39c12; --c-world: #666666;
+    --c-free: #22c55e; --c-free-fill: #dcfce7;
+    --c-occ: #ef4444; --c-occ-fill: #fecaca;
+    --c-robot: #3b82f6; --c-robot-dark: #1e40af;
+    --c-panel: #fafafa; --c-brd: #e2e8f0;
+    --c-text: #1e293b; --c-muted: #64748b; --c-grid: #cbd5e1;
+  }
+  html, body {
+    margin: 0; padding: 0; background: white;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+  }
+  .stage {
+    width: 100%; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px; box-sizing: border-box;
+  }
+  .stage > svg, .stage > .container {
+    width: 100%; height: 100%; max-width: 900px; max-height: 100%;
+  }
+  svg { display: block; }
+  svg text { font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .controls {
+    display: flex; gap: 12px; align-items: center; justify-content: center;
+    padding: 6px 10px; font-size: 13px; color: var(--c-muted);
+  }
+  .controls input[type=range] { width: 220px; accent-color: #f39c12; }
+  .controls .pill {
+    background: var(--c-panel); border: 1px solid var(--c-brd);
+    border-radius: 999px; padding: 4px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="stage"><svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" font-family="Arial, sans-serif">
+  <defs>
+    <style>
+      text { fill: #64748b; }
+    </style>
+  </defs>
+
+  <!-- Center at 160,160. Scale: 1m = 22px. Range rings: 2, 4, 6m => r=44, 88, 132 -->
+
+  <!-- Angular gridlines 0/90/180/270 -->
+  <line x1="160" y1="20" x2="160" y2="300" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+  <line x1="20" y1="160" x2="300" y2="160" stroke="#e2e8f0" stroke-width="0.5" stroke-dasharray="4,3"/>
+
+  <!-- Range rings -->
+  <circle cx="160" cy="160" r="44"  fill="none" stroke="#e2e8f0" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <circle cx="160" cy="160" r="88"  fill="none" stroke="#e2e8f0" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <circle cx="160" cy="160" r="132" fill="none" stroke="#e2e8f0" stroke-width="0.8" stroke-dasharray="4,3"/>
+
+  <!-- Range labels (along 0 deg axis) -->
+  <text x="206" y="156" font-size="10">2m</text>
+  <text x="250" y="156" font-size="10">4m</text>
+  <text x="294" y="156" font-size="10">6m</text>
+
+  <!-- Angle labels -->
+  <text x="306" y="163" font-size="11" font-weight="600">0&#176;</text>
+  <text x="160" y="14"  text-anchor="middle" font-size="11" font-weight="600">90&#176;</text>
+  <text x="2"   y="163" font-size="11" font-weight="600">180&#176;</text>
+  <text x="160" y="315" text-anchor="middle" font-size="11" font-weight="600">270&#176;</text>
+
+  <!-- LiDAR center -->
+  <circle cx="160" cy="160" r="5" fill="#2f6ed3"/>
+  <text x="168" y="175" fill="#2f6ed3" font-size="10" font-weight="bold">LiDAR</text>
+
+  <!--
+    Room: 8 x 10 m centered on LiDAR (half-widths 4 m, 5 m).
+    Scale: 1 m = 22 px. Half-widths in px: 88, 110.
+    Point at angle t has range = min(4/|cos t|, 5/|sin t|).
+    Dot positions precomputed; 28 dots at ~12.9 deg spacing.
+    Screen y up = negative SVG y.
+  -->
+
+  <!-- Right wall (0..~51 deg) -->
+  <circle cx="248" cy="160" r="3" fill="#ef4444"/>                 <!-- 0 -->
+  <circle cx="248" cy="140" r="3" fill="#ef4444"/>                 <!-- 13 -->
+  <circle cx="248" cy="117" r="3" fill="#ef4444"/>                 <!-- 26 -->
+  <circle cx="248" cy="89"  r="3" fill="#ef4444"/>                 <!-- 39 -->
+  <circle cx="248" cy="51"  r="3" fill="#ef4444"/>                 <!-- 51 -->
+  <!-- Top wall (58..122 deg) -->
+  <circle cx="229" cy="50"  r="3" fill="#ef4444"/>                 <!-- 58 -->
+  <circle cx="211" cy="50"  r="3" fill="#ef4444"/>                 <!-- 65 -->
+  <circle cx="186" cy="50"  r="3" fill="#ef4444"/>                 <!-- 77 -->
+  <circle cx="160" cy="50"  r="3" fill="#ef4444"/>                 <!-- 90 -->
+  <circle cx="134" cy="50"  r="3" fill="#ef4444"/>                 <!-- 103 -->
+  <circle cx="109" cy="50"  r="3" fill="#ef4444"/>                 <!-- 115 -->
+  <circle cx="91"  cy="50"  r="3" fill="#ef4444"/>                 <!-- 122 -->
+  <!-- Left wall (129..231 deg) -->
+  <circle cx="72"  cy="51"  r="3" fill="#ef4444"/>                 <!-- 129 -->
+  <circle cx="72"  cy="89"  r="3" fill="#ef4444"/>                 <!-- 141 -->
+  <circle cx="72"  cy="117" r="3" fill="#ef4444"/>                 <!-- 154 -->
+  <circle cx="72"  cy="140" r="3" fill="#ef4444"/>                 <!-- 167 -->
+  <circle cx="72"  cy="160" r="3" fill="#ef4444"/>                 <!-- 180 -->
+  <circle cx="72"  cy="180" r="3" fill="#ef4444"/>                 <!-- 193 -->
+  <circle cx="72"  cy="203" r="3" fill="#ef4444"/>                 <!-- 206 -->
+  <circle cx="72"  cy="231" r="3" fill="#ef4444"/>                 <!-- 219 -->
+  <circle cx="72"  cy="269" r="3" fill="#ef4444"/>                 <!-- 231 -->
+  <!-- Bottom wall (238..302 deg) -->
+  <circle cx="91"  cy="270" r="3" fill="#ef4444"/>                 <!-- 238 -->
+  <circle cx="109" cy="270" r="3" fill="#ef4444"/>                 <!-- 245 -->
+  <circle cx="134" cy="270" r="3" fill="#ef4444"/>                 <!-- 257 -->
+  <circle cx="160" cy="270" r="3" fill="#ef4444"/>                 <!-- 270 -->
+  <circle cx="186" cy="270" r="3" fill="#ef4444"/>                 <!-- 283 -->
+  <circle cx="211" cy="270" r="3" fill="#ef4444"/>                 <!-- 295 -->
+  <circle cx="229" cy="270" r="3" fill="#ef4444"/>                 <!-- 302 -->
+  <!-- Right wall (309..347 deg) -->
+  <circle cx="248" cy="269" r="3" fill="#ef4444"/>                 <!-- 309 -->
+  <circle cx="248" cy="231" r="3" fill="#ef4444"/>                 <!-- 321 -->
+  <circle cx="248" cy="203" r="3" fill="#ef4444"/>                 <!-- 334 -->
+  <circle cx="248" cy="180" r="3" fill="#ef4444"/>                 <!-- 347 -->
+
+  <!-- Obstacle cluster near 2m, ~30 deg -->
+  <circle cx="200" cy="129" r="3" fill="#ef4444"/>
+  <circle cx="207" cy="122" r="3" fill="#ef4444"/>
+  <circle cx="199" cy="117" r="3" fill="#ef4444"/>
+  <circle cx="193" cy="125" r="3" fill="#ef4444"/>
+  <text x="214" y="120" fill="#94a3b8" font-size="9" font-style="italic">obstacle</text>
+</svg></div>
+
+</body>
+</html>

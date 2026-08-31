@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 300">
+  <defs>
+    <marker id="arrow-red" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#d62828"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2a9d3f"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2f6ed3"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#666"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#f39c12"/>
+    </marker>
+  </defs>
+
+  <rect width="420" height="300" fill="#fafafa"/>
+  <text x="210" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">User Frame Concept</text>
+
+  <!-- World frame (bottom-left) -->
+  <g transform="translate(40, 250)">
+    <line x1="0" y1="0" x2="50" y2="0" stroke="#666" stroke-width="2" marker-end="url(#arrow-gray)"/>
+    <line x1="0" y1="0" x2="0" y2="-50" stroke="#666" stroke-width="2" marker-end="url(#arrow-gray)"/>
+    <text x="55" y="4" font-family="Arial, sans-serif" font-size="10" fill="#666">X_w</text>
+    <text x="-14" y="-52" font-family="Arial, sans-serif" font-size="10" fill="#666">Y_w</text>
+    <circle cx="0" cy="0" r="3" fill="#666"/>
+    <text x="-5" y="16" font-family="Arial, sans-serif" font-size="9" fill="#666">World</text>
+  </g>
+
+  <!-- Fixture / workpiece (table with part) -->
+  <rect x="160" y="120" width="200" height="110" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+  <text x="260" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#64748b">Fixture / Workpiece</text>
+
+  <!-- Part on fixture -->
+  <rect x="210" y="140" width="60" height="35" rx="2" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="240" y="161" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#1e40af">Part</text>
+
+  <!-- User frame at fixture corner -->
+  <g transform="translate(160, 230)">
+    <line x1="0" y1="0" x2="55" y2="0" stroke="#d62828" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+    <line x1="0" y1="0" x2="0" y2="-55" stroke="#2a9d3f" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+    <circle cx="0" cy="0" r="4" fill="#f39c12" stroke="#e67e22" stroke-width="1.5"/>
+    <text x="60" y="4" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#d62828">X_u</text>
+    <text x="-14" y="-57" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#2a9d3f">Y_u</text>
+    <text x="-5" y="16" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#f39c12">UF[1]</text>
+  </g>
+
+  <!-- Transform arrow from world to user frame -->
+  <path d="M 85,245 C 110,260 130,255 155,235" fill="none" stroke="#f39c12" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#arrow-orange)"/>
+  <text x="105" y="268" font-family="Arial, sans-serif" font-size="9" fill="#f39c12" font-style="italic">T_world_user</text>
+
+  <!-- Taught points relative to user frame -->
+  <circle cx="240" cy="155" r="5" fill="#3b82f6" opacity="0.8"/>
+  <text x="250" y="150" font-family="Arial, sans-serif" font-size="8" fill="#3b82f6">P[1]</text>
+  <circle cx="290" cy="165" r="5" fill="#3b82f6" opacity="0.8"/>
+  <text x="300" y="160" font-family="Arial, sans-serif" font-size="8" fill="#3b82f6">P[2]</text>
+  <circle cx="320" cy="145" r="5" fill="#3b82f6" opacity="0.8"/>
+  <text x="330" y="140" font-family="Arial, sans-serif" font-size="8" fill="#3b82f6">P[3]</text>
+
+  <!-- Robot arm (simplified) -->
+  <g transform="translate(300, 50)">
+    <line x1="0" y1="0" x2="30" y2="30" stroke="#64748b" stroke-width="6" stroke-linecap="round"/>
+    <line x1="30" y1="30" x2="10" y2="65" stroke="#64748b" stroke-width="5" stroke-linecap="round"/>
+    <line x1="10" y1="65" x2="-20" y2="80" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="6" fill="#94a3b8" stroke="#64748b" stroke-width="2"/>
+    <circle cx="30" cy="30" r="4" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+    <circle cx="10" cy="65" r="3" fill="#94a3b8" stroke="#64748b" stroke-width="1.5"/>
+  </g>
+
+  <!-- Info box -->
+  <rect x="25" y="40" width="175" height="55" rx="5" fill="#fff7ed" stroke="#f39c12" stroke-width="1"/>
+  <text x="112" y="57" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#92400e" font-weight="bold">If fixture moves:</text>
+  <text x="112" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#92400e">Re-calibrate UF (3 points only)</text>
+  <text x="112" y="83" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#92400e">All P[n] positions follow automatically</text>
+</svg>

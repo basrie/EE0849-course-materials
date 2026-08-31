@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="550" height="440" viewBox="0 0 550 440">
+  <defs>
+    <style>
+      text { font-family: Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <!-- Grid origin offset -->
+  <g transform="translate(35, 15)">
+
+    <!-- ================================================================ -->
+    <!-- CELL FILLS                                                        -->
+    <!-- 16 cols (0-15) x 12 rows (0-11), cell = 30 px  =>  480 x 360     -->
+    <!-- Perimeter (row 0, row 11, col 0, col 15) = walls (occupied)       -->
+    <!-- Interior rows 1-10, cols 1-14                                     -->
+    <!-- Robot center: col 3.5, row 9.5 => pixel (105, 285)               -->
+    <!-- Obstacle: cols 11-13, rows 2-3  => pixel (330-420, 60-120)        -->
+    <!--                                                                    -->
+    <!-- Shadow geometry (from robot through obstacle to walls):            -->
+    <!--   Upper shadow edge: robot -> top-left corner (330,60)             -->
+    <!--     slope dy/dx = -1;  hits top wall (y=0) at x~390               -->
+    <!--   Lower shadow edge: robot -> bottom-right corner (420,120)        -->
+    <!--     slope dy/dx = -0.524;  hits right wall (x=450) at y~104       -->
+    <!--                                                                    -->
+    <!-- Occluded cells (behind obstacle, between shadow edges):            -->
+    <!--   Row 1 cols 12-14   (above obstacle, in shadow cone)              -->
+    <!--   Rows 2-3 col 14    (right of obstacle)                          -->
+    <!--   Row 4 cols 12-14   (just below obstacle, widening cone)          -->
+    <!--   Row 5 cols 13-14                                                 -->
+    <!--   Row 6 col 14                                                     -->
+    <!-- ================================================================ -->
+
+    <!-- Row 1 (y=30): free cols 1-11, occluded cols 12-14 -->
+    <rect x="30"  y="30" width="330" height="30" fill="#f0fdf4"/>
+    <rect x="360" y="30" width="30"  height="30" fill="#cbd5e1"/>
+    <rect x="390" y="30" width="30"  height="30" fill="#cbd5e1"/>
+    <rect x="420" y="30" width="30"  height="30" fill="#cbd5e1"/>
+
+    <!-- Row 2 (y=60): free cols 1-10, obstacle cols 11-13, occluded col 14 -->
+    <rect x="30"  y="60" width="300" height="30" fill="#f0fdf4"/>
+    <!-- cols 11-13 = obstacle (drawn later) -->
+    <rect x="420" y="60" width="30"  height="30" fill="#cbd5e1"/>
+
+    <!-- Row 3 (y=90): free cols 1-10, obstacle cols 11-13, occluded col 14 -->
+    <rect x="30"  y="90" width="300" height="30" fill="#f0fdf4"/>
+    <rect x="420" y="90" width="30"  height="30" fill="#cbd5e1"/>
+
+    <!-- Row 4 (y=120): free cols 1-11, occluded cols 12-14 -->
+    <rect x="30"  y="120" width="330" height="30" fill="#f0fdf4"/>
+    <rect x="360" y="120" width="30"  height="30" fill="#cbd5e1"/>
+    <rect x="390" y="120" width="30"  height="30" fill="#cbd5e1"/>
+    <rect x="420" y="120" width="30"  height="30" fill="#cbd5e1"/>
+
+    <!-- Row 5 (y=150): free cols 1-12, occluded cols 13-14 -->
+    <rect x="30"  y="150" width="360" height="30" fill="#f0fdf4"/>
+    <rect x="390" y="150" width="30"  height="30" fill="#cbd5e1"/>
+    <rect x="420" y="150" width="30"  height="30" fill="#cbd5e1"/>
+
+    <!-- Row 6 (y=180): free cols 1-13, occluded col 14 -->
+    <rect x="30"  y="180" width="390" height="30" fill="#f0fdf4"/>
+    <rect x="420" y="180" width="30"  height="30" fill="#cbd5e1"/>
+
+    <!-- Row 7 (y=210): all free cols 1-14 -->
+    <rect x="30" y="210" width="420" height="30" fill="#f0fdf4"/>
+
+    <!-- Row 8 (y=240): all free -->
+    <rect x="30" y="240" width="420" height="30" fill="#f0fdf4"/>
+
+    <!-- Row 9 (y=270): all free -->
+    <rect x="30" y="270" width="420" height="30" fill="#f0fdf4"/>
+
+    <!-- Row 10 (y=300): all free -->
+    <rect x="30" y="300" width="420" height="30" fill="#f0fdf4"/>
+
+    <!-- ================================================================ -->
+    <!-- PERIMETER WALLS (occupied)                                        -->
+    <!-- ================================================================ -->
+    <rect x="0"   y="0"   width="480" height="30"  fill="#1e293b"/>
+    <rect x="0"   y="330" width="480" height="30"  fill="#1e293b"/>
+    <rect x="0"   y="30"  width="30"  height="300" fill="#1e293b"/>
+    <rect x="450" y="30"  width="30"  height="300" fill="#1e293b"/>
+
+    <!-- ================================================================ -->
+    <!-- OBSTACLE: cols 11-13, rows 2-3                                    -->
+    <!-- ================================================================ -->
+    <rect x="330" y="60" width="90" height="60" fill="#1e293b"/>
+
+    <!-- ================================================================ -->
+    <!-- GRID LINES                                                        -->
+    <!-- ================================================================ -->
+    <g stroke="#e2e8f0" stroke-width="0.5" fill="none">
+      <line x1="0"   y1="0" x2="0"   y2="360"/>
+      <line x1="30"  y1="0" x2="30"  y2="360"/>
+      <line x1="60"  y1="0" x2="60"  y2="360"/>
+      <line x1="90"  y1="0" x2="90"  y2="360"/>
+      <line x1="120" y1="0" x2="120" y2="360"/>
+      <line x1="150" y1="0" x2="150" y2="360"/>
+      <line x1="180" y1="0" x2="180" y2="360"/>
+      <line x1="210" y1="0" x2="210" y2="360"/>
+      <line x1="240" y1="0" x2="240" y2="360"/>
+      <line x1="270" y1="0" x2="270" y2="360"/>
+      <line x1="300" y1="0" x2="300" y2="360"/>
+      <line x1="330" y1="0" x2="330" y2="360"/>
+      <line x1="360" y1="0" x2="360" y2="360"/>
+      <line x1="390" y1="0" x2="390" y2="360"/>
+      <line x1="420" y1="0" x2="420" y2="360"/>
+      <line x1="450" y1="0" x2="450" y2="360"/>
+      <line x1="480" y1="0" x2="480" y2="360"/>
+      <line x1="0" y1="0"   x2="480" y2="0"/>
+      <line x1="0" y1="30"  x2="480" y2="30"/>
+      <line x1="0" y1="60"  x2="480" y2="60"/>
+      <line x1="0" y1="90"  x2="480" y2="90"/>
+      <line x1="0" y1="120" x2="480" y2="120"/>
+      <line x1="0" y1="150" x2="480" y2="150"/>
+      <line x1="0" y1="180" x2="480" y2="180"/>
+      <line x1="0" y1="210" x2="480" y2="210"/>
+      <line x1="0" y1="240" x2="480" y2="240"/>
+      <line x1="0" y1="270" x2="480" y2="270"/>
+      <line x1="0" y1="300" x2="480" y2="300"/>
+      <line x1="0" y1="330" x2="480" y2="330"/>
+      <line x1="0" y1="360" x2="480" y2="360"/>
+    </g>
+
+    <!-- ================================================================ -->
+    <!-- RAYS  (~17 thin red lines, 360 deg from robot)                    -->
+    <!-- Robot center = (105, 285)                                         -->
+    <!-- ================================================================ -->
+    <g stroke="#ef4444" stroke-width="0.8" opacity="0.3">
+      <!-- 0 deg   (east)  -> right wall -->
+      <line x1="105" y1="285" x2="450" y2="285"/>
+      <!-- ~20 deg  -> right wall upper -->
+      <line x1="105" y1="285" x2="450" y2="160"/>
+      <!-- ~38 deg  -> obstacle left face, row 3 bottom edge -->
+      <line x1="105" y1="285" x2="330" y2="108"/>
+      <!-- ~45 deg  -> obstacle left face, row 2-3 boundary -->
+      <line x1="105" y1="285" x2="330" y2="80"/>
+      <!-- ~55 deg  -> top wall, passing left of obstacle -->
+      <line x1="105" y1="285" x2="305" y2="0"/>
+      <!-- ~72 deg  -> top wall -->
+      <line x1="105" y1="285" x2="195" y2="0"/>
+      <!-- 90 deg   (north)  -> top wall -->
+      <line x1="105" y1="285" x2="105" y2="0"/>
+      <!-- ~110 deg -> top wall, leftward -->
+      <line x1="105" y1="285" x2="30"  y2="80"/>
+      <!-- ~135 deg -> left wall -->
+      <line x1="105" y1="285" x2="30"  y2="210"/>
+      <!-- ~155 deg -> left wall -->
+      <line x1="105" y1="285" x2="30"  y2="260"/>
+      <!-- 180 deg  (west) -> left wall -->
+      <line x1="105" y1="285" x2="30"  y2="285"/>
+      <!-- ~200 deg -> left wall, below -->
+      <line x1="105" y1="285" x2="30"  y2="312"/>
+      <!-- ~225 deg -> corner area -->
+      <line x1="105" y1="285" x2="30"  y2="360"/>
+      <!-- ~250 deg -> bottom wall -->
+      <line x1="105" y1="285" x2="60"  y2="330"/>
+      <!-- 270 deg  (south) -> bottom wall -->
+      <line x1="105" y1="285" x2="105" y2="330"/>
+      <!-- ~310 deg -> bottom wall -->
+      <line x1="105" y1="285" x2="240" y2="330"/>
+      <!-- ~340 deg -> right wall, below -->
+      <line x1="105" y1="285" x2="450" y2="330"/>
+    </g>
+
+    <!-- ================================================================ -->
+    <!-- ROBOT                                                             -->
+    <!-- ================================================================ -->
+    <circle cx="105" cy="285" r="10" fill="#3b82f6" stroke="#1e40af" stroke-width="1.5"/>
+    <!-- Direction tick -->
+    <line x1="110" y1="285" x2="118" y2="279" stroke="#1e40af" stroke-width="1.5" stroke-linecap="round"/>
+
+    <!-- ================================================================ -->
+    <!-- LEGEND                                                            -->
+    <!-- ================================================================ -->
+    <g transform="translate(55, 375)">
+      <rect x="0"   y="0" width="14" height="14" fill="#f0fdf4" stroke="#94a3b8" stroke-width="0.5"/>
+      <text x="20"  y="11" font-size="10" fill="#334155">Free</text>
+
+      <rect x="80"  y="0" width="14" height="14" fill="#1e293b" stroke="#94a3b8" stroke-width="0.5"/>
+      <text x="100" y="11" font-size="10" fill="#334155">Occupied</text>
+
+      <rect x="195" y="0" width="14" height="14" fill="#cbd5e1" stroke="#94a3b8" stroke-width="0.5"/>
+      <text x="215" y="11" font-size="10" fill="#334155">Unknown (occluded)</text>
+    </g>
+
+  </g>
+</svg>

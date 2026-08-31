@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-labelledby="title desc">
+  <title id="title">Gimbal lock schematic</title>
+  <desc id="desc">Three nested gimbals where middle and outer axes align, causing one rotational degree of freedom loss.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#1c5b84" />
+    </marker>
+    <style>
+      .label { font: 24px 'Quicksand', Arial, sans-serif; fill: #1f2933; }
+      .note { font: 20px 'Quicksand', Arial, sans-serif; fill: #334e68; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="520" fill="#f8f9fa"/>
+
+  <!-- Outer gimbal -->
+  <ellipse cx="320" cy="250" rx="250" ry="140" fill="none" stroke="#2f6ed3" stroke-width="10"/>
+  <text x="85" y="90" class="label" fill="#2f6ed3">Outer ring axis (z)</text>
+
+  <!-- Middle gimbal aligned with outer -->
+  <ellipse cx="320" cy="250" rx="190" ry="108" fill="none" stroke="#d62828" stroke-width="10" stroke-dasharray="16 10"/>
+  <text x="95" y="125" class="label" fill="#d62828">Middle ring axis aligns with outer</text>
+
+  <!-- Inner gimbal / payload -->
+  <ellipse cx="320" cy="250" rx="85" ry="145" fill="none" stroke="#2a9d3f" stroke-width="10"/>
+  <circle cx="320" cy="250" r="28" fill="#1c5b84" opacity="0.85"/>
+  <text x="245" y="455" class="label" fill="#2a9d3f">Inner ring / payload</text>
+
+  <!-- Axis arrows -->
+  <line x1="70" y1="250" x2="570" y2="250" stroke="#1c5b84" stroke-width="5" marker-end="url(#arrow)"/>
+  <line x1="320" y1="90" x2="320" y2="420" stroke="#1c5b84" stroke-width="5" marker-end="url(#arrow)"/>
+
+  <!-- Callout -->
+  <rect x="610" y="120" width="250" height="210" rx="14" fill="#ffffff" stroke="#aac3d6" stroke-width="2"/>
+  <text x="630" y="165" class="label">Result:</text>
+  <text x="630" y="205" class="note">Two axes become</text>
+  <text x="630" y="235" class="note">collinear, so one</text>
+  <text x="630" y="265" class="note">independent rotation</text>
+  <text x="630" y="295" class="note">is lost.</text>
+
+  <line x1="560" y1="185" x2="610" y2="185" stroke="#1c5b84" stroke-width="4" marker-end="url(#arrow)"/>
+</svg>

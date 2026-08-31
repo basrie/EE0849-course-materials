@@ -1,0 +1,274 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="390" height="380" viewBox="0 0 390 380">
+  <defs>
+    <style>
+      text { font-family: Arial, sans-serif; }
+      .idx { font-size: 9px; fill: #555; text-anchor: middle; }
+      .legend-text { font-size: 10px; fill: #333; }
+      .legend-title { font-size: 11px; fill: #111; font-weight: bold; }
+    </style>
+  </defs>
+
+  <!-- Grid origin offset: left=30, top=10 so indices fit -->
+  <g transform="translate(30, 10)">
+
+    <!-- ===================== CELLS ===================== -->
+    <!-- Unknown cells (fill entire grid first) -->
+    <g fill="#e2e8f0">
+      <rect x="0"   y="0"   width="35" height="35"/>
+      <rect x="35"  y="0"   width="35" height="35"/>
+      <rect x="70"  y="0"   width="35" height="35"/>
+      <rect x="105" y="0"   width="35" height="35"/>
+      <rect x="140" y="0"   width="35" height="35"/>
+      <rect x="175" y="0"   width="35" height="35"/>
+      <rect x="210" y="0"   width="35" height="35"/>
+      <rect x="245" y="0"   width="35" height="35"/>
+      <rect x="280" y="0"   width="35" height="35"/>
+      <rect x="315" y="0"   width="35" height="35"/>
+
+      <rect x="0"   y="35"  width="35" height="35"/>
+      <rect x="35"  y="35"  width="35" height="35"/>
+      <rect x="70"  y="35"  width="35" height="35"/>
+      <rect x="105" y="35"  width="35" height="35"/>
+      <rect x="140" y="35"  width="35" height="35"/>
+      <rect x="175" y="35"  width="35" height="35"/>
+      <rect x="210" y="35"  width="35" height="35"/>
+      <rect x="245" y="35"  width="35" height="35"/>
+      <rect x="280" y="35"  width="35" height="35"/>
+      <rect x="315" y="35"  width="35" height="35"/>
+
+      <rect x="0"   y="70"  width="35" height="35"/>
+      <rect x="35"  y="70"  width="35" height="35"/>
+      <rect x="70"  y="70"  width="35" height="35"/>
+      <rect x="105" y="70"  width="35" height="35"/>
+      <rect x="140" y="70"  width="35" height="35"/>
+      <rect x="175" y="70"  width="35" height="35"/>
+      <rect x="210" y="70"  width="35" height="35"/>
+      <rect x="245" y="70"  width="35" height="35"/>
+      <rect x="280" y="70"  width="35" height="35"/>
+      <rect x="315" y="70"  width="35" height="35"/>
+
+      <rect x="0"   y="105" width="35" height="35"/>
+      <rect x="35"  y="105" width="35" height="35"/>
+      <rect x="70"  y="105" width="35" height="35"/>
+      <rect x="105" y="105" width="35" height="35"/>
+      <rect x="140" y="105" width="35" height="35"/>
+      <rect x="175" y="105" width="35" height="35"/>
+      <rect x="210" y="105" width="35" height="35"/>
+      <rect x="245" y="105" width="35" height="35"/>
+      <rect x="280" y="105" width="35" height="35"/>
+      <rect x="315" y="105" width="35" height="35"/>
+
+      <rect x="0"   y="140" width="35" height="35"/>
+      <rect x="35"  y="140" width="35" height="35"/>
+      <rect x="70"  y="140" width="35" height="35"/>
+      <rect x="105" y="140" width="35" height="35"/>
+      <rect x="140" y="140" width="35" height="35"/>
+      <rect x="175" y="140" width="35" height="35"/>
+      <rect x="210" y="140" width="35" height="35"/>
+      <rect x="245" y="140" width="35" height="35"/>
+      <rect x="280" y="140" width="35" height="35"/>
+      <rect x="315" y="140" width="35" height="35"/>
+
+      <rect x="0"   y="175" width="35" height="35"/>
+      <rect x="35"  y="175" width="35" height="35"/>
+      <rect x="70"  y="175" width="35" height="35"/>
+      <rect x="105" y="175" width="35" height="35"/>
+      <rect x="140" y="175" width="35" height="35"/>
+      <rect x="175" y="175" width="35" height="35"/>
+      <rect x="210" y="175" width="35" height="35"/>
+      <rect x="245" y="175" width="35" height="35"/>
+      <rect x="280" y="175" width="35" height="35"/>
+      <rect x="315" y="175" width="35" height="35"/>
+
+      <rect x="0"   y="210" width="35" height="35"/>
+      <rect x="35"  y="210" width="35" height="35"/>
+      <rect x="70"  y="210" width="35" height="35"/>
+      <rect x="105" y="210" width="35" height="35"/>
+      <rect x="140" y="210" width="35" height="35"/>
+      <rect x="175" y="210" width="35" height="35"/>
+      <rect x="210" y="210" width="35" height="35"/>
+      <rect x="245" y="210" width="35" height="35"/>
+      <rect x="280" y="210" width="35" height="35"/>
+      <rect x="315" y="210" width="35" height="35"/>
+
+      <rect x="0"   y="245" width="35" height="35"/>
+      <rect x="35"  y="245" width="35" height="35"/>
+      <rect x="70"  y="245" width="35" height="35"/>
+      <rect x="105" y="245" width="35" height="35"/>
+      <rect x="140" y="245" width="35" height="35"/>
+      <rect x="175" y="245" width="35" height="35"/>
+      <rect x="210" y="245" width="35" height="35"/>
+      <rect x="245" y="245" width="35" height="35"/>
+      <rect x="280" y="245" width="35" height="35"/>
+      <rect x="315" y="245" width="35" height="35"/>
+
+      <rect x="0"   y="280" width="35" height="35"/>
+      <rect x="35"  y="280" width="35" height="35"/>
+      <rect x="70"  y="280" width="35" height="35"/>
+      <rect x="105" y="280" width="35" height="35"/>
+      <rect x="140" y="280" width="35" height="35"/>
+      <rect x="175" y="280" width="35" height="35"/>
+      <rect x="210" y="280" width="35" height="35"/>
+      <rect x="245" y="280" width="35" height="35"/>
+      <rect x="280" y="280" width="35" height="35"/>
+      <rect x="315" y="280" width="35" height="35"/>
+
+      <rect x="0"   y="315" width="35" height="35"/>
+      <rect x="35"  y="315" width="35" height="35"/>
+      <rect x="70"  y="315" width="35" height="35"/>
+      <rect x="105" y="315" width="35" height="35"/>
+      <rect x="140" y="315" width="35" height="35"/>
+      <rect x="175" y="315" width="35" height="35"/>
+      <rect x="210" y="315" width="35" height="35"/>
+      <rect x="245" y="315" width="35" height="35"/>
+      <rect x="280" y="315" width="35" height="35"/>
+      <rect x="315" y="315" width="35" height="35"/>
+    </g>
+
+    <!-- Free cells (light green) -->
+    <!-- SVG y is inverted: grid row y maps to SVG row (9-y) -->
+    <!-- cell(col, row) -> SVG rect at x=col*35, y=(9-row)*35 -->
+    <g fill="#dcfce7">
+      <!-- Ray 1 (0deg): (6,5),(7,5),(8,5) -->
+      <rect x="210" y="140" width="35" height="35"/>  <!-- (6,5) -> y=(9-5)*35=140 -->
+      <rect x="245" y="140" width="35" height="35"/>  <!-- (7,5) -->
+      <rect x="280" y="140" width="35" height="35"/>  <!-- (8,5) -->
+
+      <!-- Ray 2 (45deg): (6,6),(7,7) -->
+      <rect x="210" y="105" width="35" height="35"/>  <!-- (6,6) -> y=(9-6)*35=105 -->
+      <rect x="245" y="70"  width="35" height="35"/>  <!-- (7,7) -> y=(9-7)*35=70 -->
+
+      <!-- Ray 3 (90deg): (5,6),(5,7),(5,8) -->
+      <rect x="175" y="105" width="35" height="35"/>  <!-- (5,6) -->
+      <rect x="175" y="70"  width="35" height="35"/>  <!-- (5,7) -->
+      <rect x="175" y="35"  width="35" height="35"/>  <!-- (5,8) -->
+
+      <!-- Ray 4 (135deg): (4,6),(3,7) -->
+      <rect x="140" y="105" width="35" height="35"/>  <!-- (4,6) -->
+      <rect x="105" y="70"  width="35" height="35"/>  <!-- (3,7) -->
+
+      <!-- Ray 5 (180deg): (4,5),(3,5),(2,5) -->
+      <rect x="140" y="140" width="35" height="35"/>  <!-- (4,5) -->
+      <rect x="105" y="140" width="35" height="35"/>  <!-- (3,5) -->
+      <rect x="70"  y="140" width="35" height="35"/>  <!-- (2,5) -->
+
+      <!-- Ray 6 (270deg): (5,4),(5,3),(5,2) -->
+      <rect x="175" y="175" width="35" height="35"/>  <!-- (5,4) -> y=(9-4)*35=175 -->
+      <rect x="175" y="210" width="35" height="35"/>  <!-- (5,3) -->
+      <rect x="175" y="245" width="35" height="35"/>  <!-- (5,2) -->
+    </g>
+
+    <!-- Occupied cells (dark) -->
+    <g fill="#1e293b">
+      <!-- (9,5) --> <rect x="315" y="140" width="35" height="35"/>
+      <!-- (8,8) --> <rect x="280" y="35"  width="35" height="35"/>
+      <!-- (5,9) --> <rect x="175" y="0"   width="35" height="35"/>
+      <!-- (2,8) --> <rect x="70"  y="35"  width="35" height="35"/>
+      <!-- (1,5) --> <rect x="35"  y="140" width="35" height="35"/>
+      <!-- (5,1) --> <rect x="175" y="280" width="35" height="35"/>
+    </g>
+
+    <!-- Robot cell (5,5) - blue -->
+    <rect x="175" y="140" width="35" height="35" fill="#3b82f6"/>
+
+    <!-- ===================== GRID LINES ===================== -->
+    <g stroke="#cccccc" stroke-width="0.5" fill="none">
+      <!-- Vertical lines -->
+      <line x1="0"   y1="0" x2="0"   y2="350"/>
+      <line x1="35"  y1="0" x2="35"  y2="350"/>
+      <line x1="70"  y1="0" x2="70"  y2="350"/>
+      <line x1="105" y1="0" x2="105" y2="350"/>
+      <line x1="140" y1="0" x2="140" y2="350"/>
+      <line x1="175" y1="0" x2="175" y2="350"/>
+      <line x1="210" y1="0" x2="210" y2="350"/>
+      <line x1="245" y1="0" x2="245" y2="350"/>
+      <line x1="280" y1="0" x2="280" y2="350"/>
+      <line x1="315" y1="0" x2="315" y2="350"/>
+      <line x1="350" y1="0" x2="350" y2="350"/>
+      <!-- Horizontal lines -->
+      <line x1="0" y1="0"   x2="350" y2="0"/>
+      <line x1="0" y1="35"  x2="350" y2="35"/>
+      <line x1="0" y1="70"  x2="350" y2="70"/>
+      <line x1="0" y1="105" x2="350" y2="105"/>
+      <line x1="0" y1="140" x2="350" y2="140"/>
+      <line x1="0" y1="175" x2="350" y2="175"/>
+      <line x1="0" y1="210" x2="350" y2="210"/>
+      <line x1="0" y1="245" x2="350" y2="245"/>
+      <line x1="0" y1="280" x2="350" y2="280"/>
+      <line x1="0" y1="315" x2="350" y2="315"/>
+      <line x1="0" y1="350" x2="350" y2="350"/>
+    </g>
+
+    <!-- ===================== RAY LINES ===================== -->
+    <!-- Dashed red lines from robot center (192.5, 157.5) to endpoint centers -->
+    <!-- Robot center: cell(5,5) -> SVG center (5*35+17.5, (9-5)*35+17.5) = (192.5, 157.5) -->
+    <g stroke="#ef4444" stroke-opacity="0.4" stroke-width="1.5" stroke-dasharray="4,3" fill="none">
+      <!-- Ray 1: to (9,5) center=(332.5, 157.5) -->
+      <line x1="192.5" y1="157.5" x2="332.5" y2="157.5"/>
+      <!-- Ray 2: to (8,8) center=(297.5, 52.5) -->
+      <line x1="192.5" y1="157.5" x2="297.5" y2="52.5"/>
+      <!-- Ray 3: to (5,9) center=(192.5, 17.5) -->
+      <line x1="192.5" y1="157.5" x2="192.5" y2="17.5"/>
+      <!-- Ray 4: to (2,8) center=(87.5, 52.5) -->
+      <line x1="192.5" y1="157.5" x2="87.5"  y2="52.5"/>
+      <!-- Ray 5: to (1,5) center=(52.5, 157.5) -->
+      <line x1="192.5" y1="157.5" x2="52.5"  y2="157.5"/>
+      <!-- Ray 6: to (5,1) center=(192.5, 297.5) -->
+      <line x1="192.5" y1="157.5" x2="192.5" y2="297.5"/>
+    </g>
+
+    <!-- ===================== RAY NUMBER LABELS ===================== -->
+    <!-- Small numbered badges near each ray endpoint -->
+    <g font-family="Arial, sans-serif" font-size="10" font-weight="bold">
+      <!-- Ray 1: endpoint (9,5) - label to the right along ray -->
+      <circle cx="280" cy="149" r="8" fill="#ffffff" stroke="#ef4444" stroke-width="1.2"/>
+      <text x="280" y="153" text-anchor="middle" fill="#ef4444">1</text>
+      <!-- Ray 2: endpoint (8,8) - label along the 45deg ray -->
+      <circle cx="262" cy="96" r="8" fill="#ffffff" stroke="#ef4444" stroke-width="1.2"/>
+      <text x="262" y="100" text-anchor="middle" fill="#ef4444">2</text>
+      <!-- Ray 3: endpoint (5,9) - label along vertical ray -->
+      <circle cx="180" cy="70" r="8" fill="#ffffff" stroke="#ef4444" stroke-width="1.2"/>
+      <text x="180" y="74" text-anchor="middle" fill="#ef4444">3</text>
+      <!-- Ray 4: endpoint (2,8) - label along 135deg ray -->
+      <circle cx="123" cy="96" r="8" fill="#ffffff" stroke="#ef4444" stroke-width="1.2"/>
+      <text x="123" y="100" text-anchor="middle" fill="#ef4444">4</text>
+      <!-- Ray 5: endpoint (1,5) - label to the left along ray -->
+      <circle cx="105" cy="149" r="8" fill="#ffffff" stroke="#ef4444" stroke-width="1.2"/>
+      <text x="105" y="153" text-anchor="middle" fill="#ef4444">5</text>
+      <!-- Ray 6: endpoint (5,1) - label along downward ray -->
+      <circle cx="180" cy="245" r="8" fill="#ffffff" stroke="#ef4444" stroke-width="1.2"/>
+      <text x="180" y="249" text-anchor="middle" fill="#ef4444">6</text>
+    </g>
+
+    <!-- ===================== ROBOT MARKER ===================== -->
+    <circle cx="192.5" cy="157.5" r="10" fill="#3b82f6" stroke="#1e40af" stroke-width="1.5"/>
+    <text x="192.5" y="161" text-anchor="middle" font-size="8" fill="white" font-family="Arial, sans-serif" font-weight="bold">R</text>
+
+    <!-- ===================== AXIS INDICES ===================== -->
+    <!-- Column indices along bottom (x-axis): col 0-9 -->
+    <text class="idx" x="17.5"  y="366">0</text>
+    <text class="idx" x="52.5"  y="366">1</text>
+    <text class="idx" x="87.5"  y="366">2</text>
+    <text class="idx" x="122.5" y="366">3</text>
+    <text class="idx" x="157.5" y="366">4</text>
+    <text class="idx" x="192.5" y="366">5</text>
+    <text class="idx" x="227.5" y="366">6</text>
+    <text class="idx" x="262.5" y="366">7</text>
+    <text class="idx" x="297.5" y="366">8</text>
+    <text class="idx" x="332.5" y="366">9</text>
+
+    <!-- Row indices along left (y-axis): row 9 at top, row 0 at bottom -->
+    <text class="idx" x="-10" y="21">9</text>
+    <text class="idx" x="-10" y="56">8</text>
+    <text class="idx" x="-10" y="91">7</text>
+    <text class="idx" x="-10" y="126">6</text>
+    <text class="idx" x="-10" y="161">5</text>
+    <text class="idx" x="-10" y="196">4</text>
+    <text class="idx" x="-10" y="231">3</text>
+    <text class="idx" x="-10" y="266">2</text>
+    <text class="idx" x="-10" y="301">1</text>
+    <text class="idx" x="-10" y="336">0</text>
+
+  </g>
+
+</svg>

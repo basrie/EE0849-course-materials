@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 280">
+  <defs>
+    <marker id="arrow3" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="450" height="280" fill="#fafafa"/>
+
+  <!-- Title -->
+  <text x="225" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Linear Interpolation - Velocity Discontinuity Problem</text>
+
+  <!-- Position plot -->
+  <g transform="translate(30, 50)">
+    <text x="60" y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#2563eb">Position q(t)</text>
+
+    <!-- Axes -->
+    <line x1="0" y1="80" x2="130" y2="80" stroke="#333" stroke-width="1" marker-end="url(#arrow3)"/>
+    <line x1="0" y1="80" x2="0" y2="5" stroke="#333" stroke-width="1" marker-end="url(#arrow3)"/>
+    <text x="135" y="85" font-family="Arial, sans-serif" font-size="10" fill="#333">t</text>
+    <text x="-5" y="0" font-family="Arial, sans-serif" font-size="10" fill="#333">q</text>
+
+    <!-- Linear trajectory -->
+    <line x1="0" y1="70" x2="110" y2="20" stroke="#2563eb" stroke-width="2.5"/>
+
+    <!-- Labels -->
+    <text x="-10" y="73" font-family="Arial, sans-serif" font-size="9" fill="#333">q₀</text>
+    <text x="115" y="23" font-family="Arial, sans-serif" font-size="9" fill="#333">qf</text>
+    <text x="55" y="95" font-family="Arial, sans-serif" font-size="9" fill="#666">tf</text>
+    <line x1="110" y1="78" x2="110" y2="82" stroke="#333" stroke-width="1"/>
+  </g>
+
+  <!-- Velocity plot -->
+  <g transform="translate(170, 50)">
+    <text x="60" y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#22c55e">Velocity q'(t)</text>
+
+    <!-- Axes -->
+    <line x1="0" y1="80" x2="130" y2="80" stroke="#333" stroke-width="1" marker-end="url(#arrow3)"/>
+    <line x1="0" y1="80" x2="0" y2="5" stroke="#333" stroke-width="1" marker-end="url(#arrow3)"/>
+    <text x="135" y="85" font-family="Arial, sans-serif" font-size="10" fill="#333">t</text>
+    <text x="-5" y="0" font-family="Arial, sans-serif" font-size="10" fill="#333">v</text>
+
+    <!-- Step velocity (discontinuous) -->
+    <line x1="0" y1="80" x2="0" y2="35" stroke="#22c55e" stroke-width="2.5"/>
+    <line x1="0" y1="35" x2="110" y2="35" stroke="#22c55e" stroke-width="2.5"/>
+    <line x1="110" y1="35" x2="110" y2="80" stroke="#22c55e" stroke-width="2.5"/>
+
+    <!-- Discontinuity markers -->
+    <circle cx="0" cy="35" r="4" fill="#ef4444"/>
+    <circle cx="110" cy="35" r="4" fill="#ef4444"/>
+
+    <!-- Jump arrows -->
+    <path d="M -15 60 L -15 40" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrow3)"/>
+    <text x="-25" y="50" font-family="Arial, sans-serif" font-size="8" fill="#ef4444">jump!</text>
+  </g>
+
+  <!-- Acceleration plot -->
+  <g transform="translate(310, 50)">
+    <text x="60" y="-5" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#f97316">Acceleration q''(t)</text>
+
+    <!-- Axes -->
+    <line x1="0" y1="50" x2="130" y2="50" stroke="#333" stroke-width="1" marker-end="url(#arrow3)"/>
+    <line x1="0" y1="80" x2="0" y2="5" stroke="#333" stroke-width="1" marker-end="url(#arrow3)"/>
+    <text x="135" y="55" font-family="Arial, sans-serif" font-size="10" fill="#333">t</text>
+    <text x="-5" y="0" font-family="Arial, sans-serif" font-size="10" fill="#333">a</text>
+
+    <!-- Infinite spikes at start and end -->
+    <line x1="0" y1="50" x2="0" y2="10" stroke="#f97316" stroke-width="3"/>
+    <line x1="110" y1="50" x2="110" y2="90" stroke="#f97316" stroke-width="3"/>
+
+    <!-- Infinity symbols -->
+    <text x="5" y="15" font-family="Arial, sans-serif" font-size="12" fill="#ef4444">+∞</text>
+    <text x="115" y="90" font-family="Arial, sans-serif" font-size="12" fill="#ef4444">-∞</text>
+
+    <!-- Zero between -->
+    <line x1="1" y1="50" x2="109" y2="50" stroke="#f97316" stroke-width="2"/>
+  </g>
+
+  <!-- Problem explanation box -->
+  <rect x="30" y="170" width="390" height="95" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+  <text x="225" y="195" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="bold" fill="#dc2626">Problem: Infinite Acceleration!</text>
+  <text x="225" y="218" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#7f1d1d">Velocity jumps instantaneously from 0 to constant value</text>
+  <text x="225" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#7f1d1d">This requires infinite force/torque - physically impossible</text>
+  <text x="225" y="258" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#7f1d1d">Motors cannot achieve this - need smoother profiles!</text>
+</svg>

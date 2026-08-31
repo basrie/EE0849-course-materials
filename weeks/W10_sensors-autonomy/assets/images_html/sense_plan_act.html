@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sense → Plan → Act loop</title>
+<style>
+  :root {
+    --c-x: #d62828; --c-y: #2a9d3f; --c-z: #2f6ed3;
+    --c-vec: #7b2cbf; --c-hl: #f39c12; --c-world: #666666;
+    --c-free: #22c55e; --c-free-fill: #dcfce7;
+    --c-occ: #ef4444; --c-occ-fill: #fecaca;
+    --c-robot: #3b82f6; --c-robot-dark: #1e40af;
+    --c-panel: #fafafa; --c-brd: #e2e8f0;
+    --c-text: #1e293b; --c-muted: #64748b; --c-grid: #cbd5e1;
+  }
+  html, body {
+    margin: 0; padding: 0; background: white;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+  }
+  .stage {
+    width: 100%; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px; box-sizing: border-box;
+  }
+  .stage > svg, .stage > .container {
+    width: 100%; height: 100%; max-width: 900px; max-height: 100%;
+  }
+  svg { display: block; }
+  svg text { font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .controls {
+    display: flex; gap: 12px; align-items: center; justify-content: center;
+    padding: 6px 10px; font-size: 13px; color: var(--c-muted);
+  }
+  .controls input[type=range] { width: 220px; accent-color: #f39c12; }
+  .controls .pill {
+    background: var(--c-panel); border: 1px solid var(--c-brd);
+    border-radius: 999px; padding: 4px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="stage"><svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 360" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="arrowhead" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <path d="M0,0 L9,3.5 L0,7" fill="#64748b"/>
+    </marker>
+    <!-- Soft shadow -->
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="260" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">Sense&#8211;Plan&#8211;Act: the autonomy loop</text>
+
+  <!-- =================== Curved arrows =================== -->
+  <path d="M 320,105 C 390,115 425,170 395,220"
+        fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 310,275 C 280,315 210,315 180,275"
+        fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <path d="M 95,220 C 65,170 100,115 170,105"
+        fill="none" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- =================== SENSE node (top-center, highlighted) =================== -->
+  <g>
+    <rect x="175" y="55" width="170" height="60" rx="8" fill="#dbeafe" stroke="#2f6ed3" stroke-width="3"/>
+    <!-- Eye icon -->
+    <g transform="translate(205, 85)">
+      <!-- outer eye shape (almond) -->
+      <path d="M -16,0 C -10,-10 10,-10 16,0 C 10,10 -10,10 -16,0 Z"
+            fill="#ffffff" stroke="#1e40af" stroke-width="1.5"/>
+      <!-- iris -->
+      <circle cx="0" cy="0" r="6" fill="#2f6ed3"/>
+      <!-- pupil -->
+      <circle cx="0" cy="0" r="3" fill="#0f172a"/>
+      <!-- highlight -->
+      <circle cx="-1.8" cy="-1.8" r="1.2" fill="#ffffff"/>
+      <!-- scan lines showing active sensing -->
+      <line x1="-22" y1="-6" x2="-28" y2="-10" stroke="#2f6ed3" stroke-width="1" opacity="0.6"/>
+      <line x1="-22" y1="6" x2="-28" y2="10" stroke="#2f6ed3" stroke-width="1" opacity="0.6"/>
+      <line x1="22" y1="-6" x2="28" y2="-10" stroke="#2f6ed3" stroke-width="1" opacity="0.6"/>
+      <line x1="22" y1="6" x2="28" y2="10" stroke="#2f6ed3" stroke-width="1" opacity="0.6"/>
+    </g>
+    <text x="285" y="93" text-anchor="middle" font-size="18" font-weight="bold" fill="#1e40af">SENSE</text>
+  </g>
+  <text x="260" y="135" text-anchor="middle" font-size="11" fill="#2f6ed3">W10: Sensors &amp; Maps</text>
+
+  <!-- =================== PLAN node (bottom-right) =================== -->
+  <g>
+    <rect x="315" y="220" width="170" height="60" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <!-- Graph/brain icon: small graph with shortest path highlighted -->
+    <g transform="translate(345, 250)">
+      <!-- edges -->
+      <g stroke="#14532d" stroke-width="0.8" opacity="0.5">
+        <line x1="-16" y1="-8" x2="-4" y2="-12"/>
+        <line x1="-16" y1="-8" x2="-6" y2="4"/>
+        <line x1="-4" y1="-12" x2="8" y2="-8"/>
+        <line x1="-4" y1="-12" x2="4" y2="2"/>
+        <line x1="-6" y1="4" x2="4" y2="2"/>
+        <line x1="-6" y1="4" x2="10" y2="10"/>
+        <line x1="4" y1="2" x2="10" y2="10"/>
+        <line x1="8" y1="-8" x2="16" y2="0"/>
+        <line x1="4" y1="2" x2="16" y2="0"/>
+      </g>
+      <!-- shortest path highlighted -->
+      <polyline points="-16,-8 -4,-12 8,-8 16,0" fill="none" stroke="#16a34a" stroke-width="2" stroke-linejoin="round"/>
+      <!-- nodes -->
+      <circle cx="-16" cy="-8" r="3" fill="#22c55e" stroke="#14532d" stroke-width="0.8"/>
+      <circle cx="-4" cy="-12" r="2.5" fill="#dcfce7" stroke="#14532d" stroke-width="0.8"/>
+      <circle cx="-6" cy="4" r="2.5" fill="#dcfce7" stroke="#14532d" stroke-width="0.8"/>
+      <circle cx="8" cy="-8" r="2.5" fill="#dcfce7" stroke="#14532d" stroke-width="0.8"/>
+      <circle cx="4" cy="2" r="2.5" fill="#dcfce7" stroke="#14532d" stroke-width="0.8"/>
+      <circle cx="10" cy="10" r="2.5" fill="#dcfce7" stroke="#14532d" stroke-width="0.8"/>
+      <circle cx="16" cy="0" r="3" fill="#dc2626" stroke="#7f1d1d" stroke-width="0.8"/>
+    </g>
+    <text x="420" y="258" text-anchor="middle" font-size="18" font-weight="bold" fill="#15803d">PLAN</text>
+  </g>
+  <text x="400" y="300" text-anchor="middle" font-size="11" fill="#16a34a">W11&#8211;12: Path Planning</text>
+
+  <!-- =================== ACT node (bottom-left) =================== -->
+  <g>
+    <rect x="35" y="220" width="170" height="60" rx="8" fill="#fef3c7" stroke="#f39c12" stroke-width="2"/>
+    <!-- Wheeled robot icon -->
+    <g transform="translate(65, 250)">
+      <!-- chassis -->
+      <rect x="-18" y="-7" width="36" height="12" rx="2" fill="#f59e0b" stroke="#92400e" stroke-width="0.8"/>
+      <!-- sensor on front -->
+      <circle cx="14" cy="-1" r="2" fill="#0f172a"/>
+      <!-- wheels -->
+      <circle cx="-11" cy="7" r="4" fill="#1f2937" stroke="#0f172a" stroke-width="0.8"/>
+      <circle cx="11" cy="7" r="4" fill="#1f2937" stroke="#0f172a" stroke-width="0.8"/>
+      <circle cx="-11" cy="7" r="1.3" fill="#f3f4f6"/>
+      <circle cx="11" cy="7" r="1.3" fill="#f3f4f6"/>
+      <!-- motion arc (radial) showing action -->
+      <path d="M -24,-6 A 10 10 0 0 1 -24,6" fill="none" stroke="#b45309" stroke-width="1" stroke-dasharray="1.5,1.5"/>
+      <path d="M 24,-6 A 10 10 0 0 0 24,6" fill="none" stroke="#b45309" stroke-width="1" stroke-dasharray="1.5,1.5"/>
+    </g>
+    <text x="140" y="258" text-anchor="middle" font-size="18" font-weight="bold" fill="#b45309">ACT</text>
+  </g>
+  <text x="120" y="300" text-anchor="middle" font-size="11" fill="#f39c12">W09: Kinematics</text>
+
+  <!-- =================== Arrow labels =================== -->
+  <text x="395" y="170" text-anchor="middle" transform="rotate(30, 395, 170)"
+        font-size="11" fill="#64748b" font-style="italic">perceive &#8594; model</text>
+  <text x="245" y="323" text-anchor="middle"
+        font-size="11" fill="#64748b" font-style="italic">decide &#8594; command</text>
+  <text x="95" y="170" text-anchor="middle" transform="rotate(-30, 95, 170)"
+        font-size="11" fill="#64748b" font-style="italic">execute &#8594; observe</text>
+
+  <!-- Footer caption -->
+  <text x="260" y="345" text-anchor="middle" font-size="10" fill="#475569" font-style="italic">
+    Each loop iteration closes the gap between belief and reality.
+  </text>
+</svg></div>
+
+</body>
+</html>

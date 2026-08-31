@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 280">
+  <rect width="550" height="280" fill="#fafafa"/>
+
+  <text x="275" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">I/O Handshaking Sequence</text>
+
+  <!-- Robot side -->
+  <rect x="30" y="50" width="100" height="200" rx="8" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+  <text x="80" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">ROBOT</text>
+  <text x="80" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#dbeafe">DO[1]: Ready</text>
+  <text x="80" y="107" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#dbeafe">DO[2]: Complete</text>
+  <text x="80" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#dbeafe">DI[1]: Part Ready</text>
+
+  <!-- External device side -->
+  <rect x="420" y="50" width="100" height="200" rx="8" fill="#22c55e" stroke="#16a34a" stroke-width="2"/>
+  <text x="470" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">CONVEYOR</text>
+  <text x="470" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#dcfce7">DI: Robot Ready</text>
+  <text x="470" y="107" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#dcfce7">DI: Pick Complete</text>
+  <text x="470" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#dcfce7">DO: Part Ready</text>
+
+  <!-- Timeline -->
+  <line x1="180" y1="145" x2="180" y2="245" stroke="#666" stroke-width="1"/>
+  <line x1="370" y1="145" x2="370" y2="245" stroke="#666" stroke-width="1"/>
+
+  <!-- Signal 1: Robot Ready -->
+  <line x1="130" y1="155" x2="180" y2="155" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="180" y1="155" x2="370" y2="155" stroke="#3b82f6" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="275" y="150" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#3b82f6">1. DO[1]=ON "Ready"</text>
+
+  <!-- Signal 2: Part Ready -->
+  <line x1="420" y1="180" x2="370" y2="180" stroke="#22c55e" stroke-width="2"/>
+  <line x1="370" y1="180" x2="180" y2="180" stroke="#22c55e" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="275" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#22c55e">2. DI[1]=ON "Part in position"</text>
+
+  <!-- Signal 3: Robot picks (internal) -->
+  <rect x="140" y="195" width="80" height="15" rx="3" fill="#f97316" opacity="0.3"/>
+  <text x="180" y="206" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#f97316">3. Pick operation</text>
+
+  <!-- Signal 4: Pick Complete -->
+  <line x1="130" y1="225" x2="180" y2="225" stroke="#3b82f6" stroke-width="2"/>
+  <line x1="180" y1="225" x2="370" y2="225" stroke="#3b82f6" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="275" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#3b82f6">4. DO[2]=PULSE "Complete"</text>
+
+  <!-- Signal 5: Conveyor indexes -->
+  <rect x="380" y="235" width="80" height="15" rx="3" fill="#22c55e" opacity="0.3"/>
+  <text x="420" y="246" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#22c55e">5. Index next part</text>
+
+  <!-- Arrows marker definition -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#333"/>
+    </marker>
+  </defs>
+
+  <!-- Time arrow -->
+  <line x1="160" y1="260" x2="390" y2="260" stroke="#666" stroke-width="1" marker-end="url(#arr)"/>
+  <text x="275" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Time</text>
+</svg>

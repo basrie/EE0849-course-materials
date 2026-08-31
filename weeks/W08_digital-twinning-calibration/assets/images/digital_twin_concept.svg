@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280">
+  <rect width="700" height="280" fill="#fafafa"/>
+
+  <text x="350" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">The Digital Twin Concept</text>
+
+  <!-- Python/Simulation side -->
+  <g transform="translate(50, 50)">
+    <rect x="0" y="0" width="200" height="180" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+    <text x="100" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e40af">Digital Twin</text>
+    <text x="100" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#3b82f6">(Python Simulation)</text>
+
+    <!-- Robot icon -->
+    <g transform="translate(60, 70)">
+      <rect x="30" y="60" width="20" height="30" fill="#93c5fd" stroke="#3b82f6" stroke-width="1.5"/>
+      <line x1="40" y1="60" x2="40" y2="40" stroke="#3b82f6" stroke-width="3"/>
+      <line x1="40" y1="40" x2="60" y2="25" stroke="#3b82f6" stroke-width="3"/>
+      <line x1="60" y1="25" x2="75" y2="35" stroke="#3b82f6" stroke-width="3"/>
+      <circle cx="75" cy="35" r="5" fill="#3b82f6"/>
+    </g>
+
+    <text x="100" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Mathematical Model</text>
+  </g>
+
+  <!-- Bidirectional arrows -->
+  <g transform="translate(270, 100)">
+    <!-- Top arrow: Commands -->
+    <line x1="0" y1="20" x2="140" y2="20" stroke="#22c55e" stroke-width="2"/>
+    <polygon points="140,20 130,15 130,25" fill="#22c55e"/>
+    <text x="70" y="12" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#22c55e">Joint Commands (q)</text>
+
+    <!-- Bottom arrow: Feedback -->
+    <line x1="140" y1="60" x2="0" y2="60" stroke="#f97316" stroke-width="2"/>
+    <polygon points="0,60 10,55 10,65" fill="#f97316"/>
+    <text x="70" y="80" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#f97316">Position Feedback</text>
+  </g>
+
+  <!-- Real Robot side -->
+  <g transform="translate(430, 50)">
+    <rect x="0" y="0" width="200" height="180" rx="10" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="100" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#166534">Physical Robot</text>
+    <text x="100" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#22c55e">(FANUC Hardware)</text>
+
+    <!-- Robot icon (slightly different to show "real") -->
+    <g transform="translate(60, 70)">
+      <rect x="30" y="60" width="20" height="30" fill="#86efac" stroke="#22c55e" stroke-width="1.5"/>
+      <line x1="40" y1="60" x2="40" y2="40" stroke="#22c55e" stroke-width="4"/>
+      <line x1="40" y1="40" x2="62" y2="27" stroke="#22c55e" stroke-width="4"/>
+      <line x1="62" y1="27" x2="78" y2="38" stroke="#22c55e" stroke-width="4"/>
+      <circle cx="78" cy="38" r="6" fill="#22c55e"/>
+    </g>
+
+    <text x="100" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Real Mechanism</text>
+  </g>
+
+  <!-- Reality Gap annotation -->
+  <rect x="250" y="200" width="200" height="50" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="350" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#92400e">The Reality Gap</text>
+  <text x="350" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#92400e">Differences between model and reality</text>
+</svg>

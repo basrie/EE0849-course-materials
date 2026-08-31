@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430">
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f2933"/>
+  </marker>
+  <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#c43d2c"/>
+  </marker>
+  <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#2463a6"/>
+  </marker>
+  <marker id="arrow-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#2d7c53"/>
+  </marker>
+  <marker id="arrow-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <path d="M 0 0 L 10 5 L 0 10 z" fill="#c9851f"/>
+  </marker>
+  <style>
+    .label {
+      font-family: Georgia, 'Times New Roman', serif;
+      fill: #1f2933;
+      font-size: 22px;
+    }
+    .small {
+      font-family: Georgia, 'Times New Roman', serif;
+      fill: #1f2933;
+      font-size: 18px;
+    }
+    .tiny {
+      font-family: Georgia, 'Times New Roman', serif;
+      fill: #6b7280;
+      font-size: 15px;
+    }
+    .title {
+      font-family: Georgia, 'Times New Roman', serif;
+      fill: #1f2933;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</defs>
+<rect x="0" y="0" width="760" height="430" fill="#f7f3e8"/>
+<text x="34.00" y="40.00" class="title" text-anchor="start">Problem 2: SCARA geometry</text>
+<rect x="28.00" y="70.00" width="350.00" height="310.00" fill="#fffaf0" stroke="#d7d2c4" stroke-width="2" rx="18" ry="18"/>
+<text x="54.00" y="100.00" class="label" text-anchor="start">Top view (planar reach)</text>
+<line x1="125.00" y1="310.00" x2="305.00" y2="310.00" stroke="#c43d2c" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-red)"/>
+<line x1="125.00" y1="310.00" x2="125.00" y2="150.00" stroke="#2d7c53" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-green)"/>
+<text x="313.00" y="314.00" class="small" text-anchor="start" fill="#c43d2c">x</text>
+<text x="117.00" y="140.00" class="small" text-anchor="end" fill="#2d7c53">y</text>
+<polyline points="125.00,310.00 237.76,268.96 282.76,191.02" fill="none" stroke="#2463a6" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="125.00" cy="310.00" r="8.00" fill="white" stroke="#1f2933" stroke-width="3"/>
+<circle cx="237.76" cy="268.96" r="8.00" fill="white" stroke="#1f2933" stroke-width="3"/>
+<circle cx="282.76" cy="191.02" r="9.00" fill="#fff2cc" stroke="#c9851f" stroke-width="3"/>
+<path d="M 171.00 310.00 A 46.00 46.00 0 0 0 168.23 294.27" fill="none" stroke="#c9851f" stroke-width="3" stroke-linecap="round"/>
+<path d="M 273.47 255.96 A 38.00 38.00 0 0 0 256.76 236.05" fill="none" stroke="#c9851f" stroke-width="3" stroke-linecap="round"/>
+<text x="175.00" y="292.00" class="label" text-anchor="start" fill="#c9851f">θ₁</text>
+<text x="263.76" y="252.96" class="label" text-anchor="start" fill="#c9851f">θ₂</text>
+<text x="173.38" y="277.48" class="small" text-anchor="start" fill="#2463a6">a₁</text>
+<text x="268.26" y="223.99" class="small" text-anchor="start" fill="#2463a6">a₂</text>
+<text x="296.76" y="185.02" class="small" text-anchor="start" fill="#c9851f">wrist axis</text>
+<rect x="402.00" y="70.00" width="330.00" height="310.00" fill="#fdf8ef" stroke="#d7d2c4" stroke-width="2" rx="18" ry="18"/>
+<text x="426.00" y="100.00" class="label" text-anchor="start">Side view (vertical slide)</text>
+<line x1="520.00" y1="126.00" x2="520.00" y2="318.00" stroke="#1f7a7a" stroke-width="8" stroke-linecap="round"/>
+<circle cx="520.00" cy="154.00" r="10.00" fill="white" stroke="#1f2933" stroke-width="3"/>
+<circle cx="520.00" cy="246.00" r="10.00" fill="#fff2cc" stroke="#c9851f" stroke-width="3"/>
+<line x1="464.00" y1="246.00" x2="576.00" y2="246.00" stroke="#7b4da3" stroke-width="4" stroke-linecap="round"/>
+<line x1="616.00" y1="154.00" x2="616.00" y2="246.00" stroke="#2463a6" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-blue)"/>
+<text x="628.00" y="208.00" class="small" text-anchor="start" fill="#2463a6">d₃</text>
+<line x1="668.00" y1="246.00" x2="668.00" y2="296.00" stroke="#c9851f" stroke-width="2.5" stroke-linecap="round" marker-end="url(#arrow-orange)"/>
+<text x="680.00" y="278.00" class="small" text-anchor="start" fill="#c9851f">d₄</text>
+<text x="426.00" y="218.00" class="small" text-anchor="start">z position =</text>
+<text x="426.00" y="248.00" class="label" text-anchor="start" fill="#7b4da3">− (d₃ + d₄)</text>
+<text x="426.00" y="292.00" class="small" text-anchor="start" fill="#6b7280">Tool z-axis stays downward</text>
+</svg>

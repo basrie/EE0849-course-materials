@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="370" viewBox="0 0 480 370" font-family="Arial, sans-serif">
+  <defs>
+    <!-- Subtle floor gradient -->
+    <radialGradient id="roomFloor" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e5e7eb"/>
+    </radialGradient>
+    <!-- Obstacle texture -->
+    <pattern id="obsHatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="5" height="5" fill="#94a3b8"/>
+      <line x1="0" y1="0" x2="0" y2="5" stroke="#64748b" stroke-width="0.8"/>
+    </pattern>
+    <!-- Arrow markers -->
+    <marker id="rayArr" markerWidth="6" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <path d="M0,0 L6,2.5 L0,5" fill="#ef4444"/>
+    </marker>
+    <!-- Soft fog for the shadow -->
+    <filter id="fogBlur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="1.2"/>
+    </filter>
+  </defs>
+
+  <!-- Title -->
+  <text x="240" y="18" text-anchor="middle" font-size="12" font-weight="bold" fill="#1e293b">One 2D scan: 360 rays, each hits the first surface it meets</text>
+
+  <!-- =============== Room =============== -->
+  <rect x="30" y="30" width="420" height="300" rx="3" fill="url(#roomFloor)" stroke="#475569" stroke-width="2"/>
+
+  <!-- =============== Obstacle (rectangle at x=300..350, y=90..140) =============== -->
+  <!-- LiDAR is at (225, 190). Obstacle is up+right of LiDAR. Silhouette corners: top-left (300,90) and bottom-right (350,140). -->
+  <rect x="300" y="90" width="50" height="50" fill="url(#obsHatch)" stroke="#1e293b" stroke-width="1.5"/>
+  <!-- Obstacle shadow below (suggests 3D depth / light from above) -->
+  <ellipse cx="325" cy="145" rx="26" ry="3" fill="#000" fill-opacity="0.12"/>
+  <text x="325" y="166" text-anchor="middle" font-size="10" fill="#334155" font-weight="bold">obstacle</text>
+
+  <!-- =============== Shadow (occluded) region =============== -->
+  <!-- LiDAR at (225, 190). Silhouette rays:
+         - through top-left (300, 90): direction (75, -100). At x=420: t=195/75=2.6, y=190-260=-70 (above). At y=30: t=160/100=1.6, x=225+1.6*75=345. Ray hits top wall at (345, 30).
+         - through bottom-right (350, 140): direction (125, -50). At x=420: t=195/125=1.56, y=190-1.56*50=112. Ray hits right wall at (420, 112).
+       Shadow polygon (traversed clockwise, outside obstacle):
+         (300, 90) -> (345, 30) [top wall hit] -> (420, 30) [top-right room corner] -> (420, 112) [right wall hit] -> (350, 140) [bottom-right obstacle corner] -> (350, 90) [top-right obstacle corner] -> back to (300, 90) -->
+  <g filter="url(#fogBlur)" opacity="0.45">
+    <polygon points="300,90 345,30 420,30 420,112 350,140 350,90"
+             fill="#94a3b8"/>
+  </g>
+  <polygon points="300,90 345,30 420,30 420,112 350,140 350,90"
+           fill="none" stroke="#f39c12" stroke-width="0.9" stroke-dasharray="4,3" opacity="0.7"/>
+
+  <!-- "?" marks inside the shadow -->
+  <g font-size="14" font-weight="bold" fill="#475569" font-style="italic" text-anchor="middle">
+    <text x="390" y="62" opacity="0.8">?</text>
+    <text x="405" y="95" opacity="0.6">?</text>
+    <text x="370" y="115" opacity="0.5">?</text>
+  </g>
+  <text x="400" y="48" text-anchor="middle" font-size="9" fill="#b45309" font-weight="bold">shadow</text>
+
+  <!-- =============== Rays from LiDAR =============== -->
+  <!-- LiDAR at (225, 190). 16 main rays at 22.5° spacing, plus 2 extra obstacle-blocked rays for clarity. -->
+  <!-- Angles measured CCW from +x axis; screen direction = (cos θ, -sin θ). -->
+  <!-- Ray endpoints computed for room walls (x=30..450 wait no, 30..450? actually 30..450. Let me recompute for x_right=450, y_top=30, y_bottom=330, x_left=30, LiDAR (225,190)).
+       x_right_dist = 450-225 = 225
+       x_left_dist = 225-30 = 195
+       y_top_dist = 190-30 = 160
+       y_bottom_dist = 330-190 = 140
+  -->
+
+  <!-- 1. 0° (right): endpoint (450, 190) -->
+  <line x1="225" y1="190" x2="450" y2="190" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="450" cy="190" r="2.5" fill="#ef4444"/>
+
+  <!-- 2. 22.5°: d=(0.924, -0.383). First check obstacle bottom (y=140). t=50/0.383=130.5, x=225+130.5*0.924=345.5. x in [300,350]? Yes. Hits bottom face at (345.5, 140).
+       But wait — obstacle at 300..350, and x=345.5 inside. Ray hits obstacle bottom at (345.5, 140). -->
+  <line x1="225" y1="190" x2="346" y2="140" stroke="#ef4444" stroke-width="1.3" opacity="0.85"/>
+  <circle cx="346" cy="140" r="2.5" fill="#ef4444"/>
+
+  <!-- Extra: 32° (blocked by obstacle left face). d=(0.848, -0.530). At x=300: t=75/0.848=88.4, y=190-88.4*0.530=143.1. y=143.1 > 140, so ray goes below obstacle. Hmm at x=300 the ray is still below obstacle. Need to check bottom face first. At y=140: t=50/0.530=94.3, x=225+94.3*0.848=305. x=305 in [300,350]. Hits bottom at (305, 140). -->
+  <line x1="225" y1="190" x2="305" y2="140" stroke="#ef4444" stroke-width="1.3" opacity="0.85"/>
+  <circle cx="305" cy="140" r="2.5" fill="#ef4444"/>
+
+  <!-- Extra: 40° (blocked by obstacle left face). d=(0.766, -0.643). At x=300: t=75/0.766=97.9, y=190-97.9*0.643=127.1. y=127.1 in [90,140]. Hits left face at (300, 127.1). -->
+  <line x1="225" y1="190" x2="300" y2="127" stroke="#ef4444" stroke-width="1.3" opacity="0.85"/>
+  <circle cx="300" cy="127" r="2.5" fill="#ef4444"/>
+
+  <!-- 3. 45°: d=(0.707, -0.707). At x=300: t=75/0.707=106, y=190-106*0.707=115. Hits left face at (300, 115). -->
+  <line x1="225" y1="190" x2="300" y2="115" stroke="#ef4444" stroke-width="1.3" opacity="0.85"/>
+  <circle cx="300" cy="115" r="2.5" fill="#ef4444"/>
+
+  <!-- Extra: 52° (still blocked). d=(0.616, -0.788). At x=300: t=75/0.616=121.8, y=190-121.8*0.788=94.0. y=94.0 in [90,140]. Hits left face at (300, 94). -->
+  <line x1="225" y1="190" x2="300" y2="94" stroke="#ef4444" stroke-width="1.3" opacity="0.85"/>
+  <circle cx="300" cy="94" r="2.5" fill="#ef4444"/>
+
+  <!-- 4. 67.5°: d=(0.383, -0.924). At x=300: t=75/0.383=195.8, y=190-195.8*0.924=8.9. Above top wall. First check y=30: t=160/0.924=173.2, x=225+173.2*0.383=291.3. x=291.3 < 300 (left of obstacle). Hits top wall at (291.3, 30). -->
+  <line x1="225" y1="190" x2="291" y2="30" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="291" cy="30" r="2.5" fill="#ef4444"/>
+
+  <!-- 5. 90°: straight up. (225, 30). -->
+  <line x1="225" y1="190" x2="225" y2="30" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="225" cy="30" r="2.5" fill="#ef4444"/>
+
+  <!-- 6. 112.5°: d=(-0.383, -0.924). At y=30: t=160/0.924=173.2, x=225-173.2*0.383=158.7. -->
+  <line x1="225" y1="190" x2="159" y2="30" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="159" cy="30" r="2.5" fill="#ef4444"/>
+
+  <!-- 7. 135°: d=(-0.707, -0.707). At y=30: t=160/0.707=226.3, x=225-226.3*0.707=64.0. At x=30: t=195/0.707=275.8. Top wall first. (64, 30). -->
+  <line x1="225" y1="190" x2="64" y2="30" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="64" cy="30" r="2.5" fill="#ef4444"/>
+
+  <!-- 8. 157.5°: d=(-0.924, -0.383). At x=30: t=195/0.924=211, y=190-211*0.383=109.2. At y=30: t=160/0.383=417.8. Left wall first. (30, 109). -->
+  <line x1="225" y1="190" x2="30" y2="109" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="30" cy="109" r="2.5" fill="#ef4444"/>
+
+  <!-- 9. 180°: straight left. (30, 190). -->
+  <line x1="225" y1="190" x2="30" y2="190" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="30" cy="190" r="2.5" fill="#ef4444"/>
+
+  <!-- 10. 202.5°: d=(-0.924, 0.383). At x=30: t=195/0.924=211, y=190+211*0.383=270.8. -->
+  <line x1="225" y1="190" x2="30" y2="271" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="30" cy="271" r="2.5" fill="#ef4444"/>
+
+  <!-- 11. 225°: d=(-0.707, 0.707). At y=330: t=140/0.707=198, x=225-198*0.707=85.0. At x=30: t=275.8. Bottom wall first. (85, 330). -->
+  <line x1="225" y1="190" x2="85" y2="330" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="85" cy="330" r="2.5" fill="#ef4444"/>
+
+  <!-- 12. 247.5°: d=(-0.383, 0.924). At y=330: t=140/0.924=151.5, x=225-151.5*0.383=166.9. -->
+  <line x1="225" y1="190" x2="167" y2="330" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="167" cy="330" r="2.5" fill="#ef4444"/>
+
+  <!-- 13. 270°: straight down. (225, 330). -->
+  <line x1="225" y1="190" x2="225" y2="330" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="225" cy="330" r="2.5" fill="#ef4444"/>
+
+  <!-- 14. 292.5°: d=(0.383, 0.924). At y=330: t=140/0.924=151.5, x=225+151.5*0.383=283.0. -->
+  <line x1="225" y1="190" x2="283" y2="330" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="283" cy="330" r="2.5" fill="#ef4444"/>
+
+  <!-- 15. 315°: d=(0.707, 0.707). At y=330: t=140/0.707=198, x=225+198*0.707=365. Bottom wall first. (365, 330). -->
+  <line x1="225" y1="190" x2="365" y2="330" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="365" cy="330" r="2.5" fill="#ef4444"/>
+
+  <!-- 16. 337.5°: d=(0.924, 0.383). At x=450: t=225/0.924=243.5, y=190+243.5*0.383=283.2. -->
+  <line x1="225" y1="190" x2="450" y2="283" stroke="#ef4444" stroke-width="1.3" opacity="0.75"/>
+  <circle cx="450" cy="283" r="2.5" fill="#ef4444"/>
+
+  <!-- Silhouette rays (solid to obstacle corner, dashed beyond = shadow boundary) -->
+  <!-- Top-left corner (300, 90): direction (75, -100). Extended hits top wall at (345, 30). -->
+  <line x1="225" y1="190" x2="300" y2="90" stroke="#f39c12" stroke-width="1.2" opacity="0.9"/>
+  <line x1="300" y1="90" x2="345" y2="30" stroke="#f39c12" stroke-width="1" stroke-dasharray="4,3" opacity="0.7"/>
+  <!-- Bottom-right corner (350, 140): direction (125, -50). Extended hits right wall at (450, 110). -->
+  <line x1="225" y1="190" x2="350" y2="140" stroke="#f39c12" stroke-width="1.2" opacity="0.9"/>
+  <line x1="350" y1="140" x2="450" y2="110" stroke="#f39c12" stroke-width="1" stroke-dasharray="4,3" opacity="0.7"/>
+
+  <!-- =============== Ray labels (just a few for clarity) =============== -->
+  <text x="430" y="183" font-size="10" fill="#475569" font-style="italic" text-anchor="end">(r&#x2081;, &#x03B1;&#x2081;)</text>
+  <text x="240" y="80" font-size="10" fill="#475569" font-style="italic">(r&#x2085;, &#x03B1;&#x2085;)</text>
+  <text x="110" y="183" font-size="10" fill="#475569" font-style="italic">(r&#x2089;, &#x03B1;&#x2089;)</text>
+  <text x="310" y="170" font-size="10" fill="#dc2626" font-style="italic" font-weight="bold">(r&#x1D62;, &#x03B1;&#x1D62;) &#8592; hits obstacle</text>
+  <line x1="316" y1="163" x2="307" y2="143" stroke="#dc2626" stroke-width="0.7" opacity="0.7"/>
+
+  <!-- =============== Angle arc (showing α is measured from +x axis, CCW) =============== -->
+  <path d="M 260 190 A 35 35 0 0 0 250 168"
+        fill="none" stroke="#64748b" stroke-width="0.8"/>
+  <text x="260" y="170" font-size="10" fill="#64748b" font-style="italic">&#x03B1;</text>
+  <text x="275" y="200" font-size="9" fill="#94a3b8">0&#176;</text>
+
+  <!-- =============== LiDAR (drawn last, on top) =============== -->
+  <g>
+    <circle cx="225" cy="190" r="9" fill="#2f6ed3" stroke="#1e40af" stroke-width="1.5"/>
+    <!-- Rotating-mirror hint: small arc indicator -->
+    <circle cx="225" cy="190" r="13" fill="none" stroke="#2f6ed3" stroke-width="0.8" stroke-dasharray="2,2" opacity="0.6"/>
+    <!-- rotation arrow -->
+    <path d="M 225 174 A 16 16 0 0 1 241 190" fill="none" stroke="#2f6ed3" stroke-width="1" marker-end="url(#rayArr)"/>
+  </g>
+  <text x="225" y="218" text-anchor="middle" font-size="10" font-weight="bold" fill="#1e40af">LiDAR</text>
+
+  <!-- =============== Legend =============== -->
+  <g transform="translate(30, 345)">
+    <line x1="0" y1="6" x2="18" y2="6" stroke="#ef4444" stroke-width="1.3"/>
+    <circle cx="18" cy="6" r="2.5" fill="#ef4444"/>
+    <text x="24" y="9" font-size="9" fill="#334155">ray &amp; first-hit endpoint</text>
+
+    <line x1="170" y1="6" x2="188" y2="6" stroke="#f39c12" stroke-width="1.2"/>
+    <line x1="188" y1="6" x2="200" y2="6" stroke="#f39c12" stroke-width="1" stroke-dasharray="3,2"/>
+    <text x="206" y="9" font-size="9" fill="#334155">silhouette ray &#8594; shadow edge</text>
+
+    <rect x="362" y="0" width="12" height="12" fill="#94a3b8" opacity="0.45"/>
+    <text x="378" y="9" font-size="9" fill="#334155">unseen (shadow)</text>
+  </g>
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 380">
+  <rect width="600" height="380" fill="#fafafa"/>
+
+  <text x="300" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">Week 7: Industrial Sensors & Logic Summary</text>
+
+  <!-- Digital I/O -->
+  <g transform="translate(20, 50)">
+    <rect x="0" y="0" width="170" height="140" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+    <text x="85" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1e40af">Digital I/O</text>
+
+    <text x="15" y="50" font-family="Arial, sans-serif" font-size="10" fill="#333">Inputs (DI, RI, UI)</text>
+    <text x="20" y="65" font-family="Arial, sans-serif" font-size="9" fill="#666">• Sensors</text>
+    <text x="20" y="78" font-family="Arial, sans-serif" font-size="9" fill="#666">• Switches</text>
+    <text x="20" y="91" font-family="Arial, sans-serif" font-size="9" fill="#666">• Safety devices</text>
+
+    <text x="15" y="110" font-family="Arial, sans-serif" font-size="10" fill="#333">Outputs (DO, RO, UO)</text>
+    <text x="20" y="125" font-family="Arial, sans-serif" font-size="9" fill="#666">• Grippers, conveyors</text>
+  </g>
+
+  <!-- Sensors -->
+  <g transform="translate(210, 50)">
+    <rect x="0" y="0" width="170" height="140" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="85" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#166534">Industrial Sensors</text>
+
+    <text x="15" y="50" font-family="Arial, sans-serif" font-size="9" fill="#333">• Inductive (metal)</text>
+    <text x="15" y="65" font-family="Arial, sans-serif" font-size="9" fill="#333">• Capacitive (any)</text>
+    <text x="15" y="80" font-family="Arial, sans-serif" font-size="9" fill="#333">• Photoelectric</text>
+    <text x="25" y="93" font-family="Arial, sans-serif" font-size="8" fill="#666">- Through-beam</text>
+    <text x="25" y="105" font-family="Arial, sans-serif" font-size="8" fill="#666">- Retro-reflective</text>
+    <text x="25" y="117" font-family="Arial, sans-serif" font-size="8" fill="#666">- Diffuse</text>
+    <text x="15" y="132" font-family="Arial, sans-serif" font-size="9" fill="#333">• Mechanical switches</text>
+  </g>
+
+  <!-- Safety -->
+  <g transform="translate(400, 50)">
+    <rect x="0" y="0" width="180" height="140" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+    <text x="90" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#991b1b">Safety Systems</text>
+
+    <text x="15" y="50" font-family="Arial, sans-serif" font-size="9" fill="#333">• E-Stop (hardwired)</text>
+    <text x="15" y="65" font-family="Arial, sans-serif" font-size="9" fill="#333">• Deadman switch</text>
+    <text x="15" y="80" font-family="Arial, sans-serif" font-size="9" fill="#333">• Light curtains</text>
+    <text x="15" y="95" font-family="Arial, sans-serif" font-size="9" fill="#333">• Safety mats</text>
+
+    <text x="15" y="115" font-family="Arial, sans-serif" font-size="9" font-weight="bold" fill="#991b1b">Fail-Safe Design:</text>
+    <text x="15" y="130" font-family="Arial, sans-serif" font-size="8" fill="#991b1b">NC contacts in series</text>
+  </g>
+
+  <!-- Program Logic -->
+  <g transform="translate(20, 205)">
+    <rect x="0" y="0" width="270" height="155" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="135" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#92400e">TP Program Logic</text>
+
+    <text x="15" y="50" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">Motion Commands</text>
+    <text x="20" y="65" font-family="Arial, sans-serif" font-size="9" fill="#666">J (Joint), L (Linear), C (Circular)</text>
+
+    <text x="15" y="85" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">Termination</text>
+    <text x="20" y="100" font-family="Arial, sans-serif" font-size="9" fill="#666">FINE (stop) vs CNT (blend)</text>
+
+    <text x="15" y="120" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#333">Control Flow</text>
+    <text x="20" y="135" font-family="Arial, sans-serif" font-size="9" fill="#666">IF/THEN, FOR loops, WAIT, JMP</text>
+  </g>
+
+  <!-- Key Commands Box -->
+  <g transform="translate(310, 205)">
+    <rect x="0" y="0" width="270" height="155" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="135" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#4338ca">Key FANUC Commands</text>
+
+    <text x="15" y="50" font-family="monospace" font-size="9" fill="#333">DO[1]=ON</text>
+    <text x="120" y="50" font-family="Arial, sans-serif" font-size="8" fill="#666">Set output</text>
+
+    <text x="15" y="70" font-family="monospace" font-size="9" fill="#333">IF DI[1]=ON,...</text>
+    <text x="120" y="70" font-family="Arial, sans-serif" font-size="8" fill="#666">Check input</text>
+
+    <text x="15" y="90" font-family="monospace" font-size="9" fill="#333">WAIT DI[2]=ON</text>
+    <text x="120" y="90" font-family="Arial, sans-serif" font-size="8" fill="#666">Wait for signal</text>
+
+    <text x="15" y="110" font-family="monospace" font-size="9" fill="#333">WAIT 1.0(sec)</text>
+    <text x="120" y="110" font-family="Arial, sans-serif" font-size="8" fill="#666">Time delay</text>
+
+    <text x="15" y="130" font-family="monospace" font-size="9" fill="#333">JMP LBL[1]</text>
+    <text x="120" y="130" font-family="Arial, sans-serif" font-size="8" fill="#666">Jump to label</text>
+
+    <text x="15" y="150" font-family="monospace" font-size="9" fill="#333">R[1]=R[1]+1</text>
+    <text x="120" y="150" font-family="Arial, sans-serif" font-size="8" fill="#666">Register math</text>
+  </g>
+
+  <!-- Footer -->
+  <text x="300" y="375" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#666">Lab 6: Create a pick-and-place program on the FANUC teach pendant</text>
+</svg>

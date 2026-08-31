@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2D LiDAR scan</title>
+<style>
+  :root {
+    --c-x: #d62828; --c-y: #2a9d3f; --c-z: #2f6ed3;
+    --c-vec: #7b2cbf; --c-hl: #f39c12; --c-world: #666666;
+    --c-free: #22c55e; --c-free-fill: #dcfce7;
+    --c-occ: #ef4444; --c-occ-fill: #fecaca;
+    --c-robot: #3b82f6; --c-robot-dark: #1e40af;
+    --c-panel: #fafafa; --c-brd: #e2e8f0;
+    --c-text: #1e293b; --c-muted: #64748b; --c-grid: #cbd5e1;
+  }
+  html, body {
+    margin: 0; padding: 0; background: white;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+  }
+  .stage {
+    width: 100%; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px; box-sizing: border-box;
+  }
+  .stage > svg, .stage > .container {
+    width: 100%; height: 100%; max-width: 780px; max-height: 100%;
+  }
+  svg { display: block; }
+  svg text { font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .controls {
+    display: flex; gap: 12px; align-items: center; justify-content: center;
+    padding: 6px 10px; font-size: 13px; color: var(--c-muted);
+  }
+  .controls input[type=range] { width: 220px; accent-color: #f39c12; }
+  .controls .pill {
+    background: var(--c-panel); border: 1px solid var(--c-brd);
+    border-radius: 999px; padding: 4px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+<div class="container" id="ls-root">
+  <svg viewBox="0 0 540 420" preserveAspectRatio="xMidYMid meet">
+    <text x="270" y="24" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">2D LiDAR sweep (animated)</text>
+    <g id="walls" stroke="#1e293b" stroke-width="3" stroke-linecap="round"></g>
+    <g id="rays"></g>
+    <g id="hits"></g>
+    <line id="active" stroke="#f39c12" stroke-width="2.5"/>
+    <circle id="sensor" cx="270" cy="240" r="9" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+    <text x="270" y="270" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e40af">LiDAR</text>
+  </svg>
+  <div class="controls">
+    <button id="play" class="pill" style="cursor:pointer">Pause</button>
+    <input id="speed" type="range" min="1" max="20" value="6">
+    <span class="pill">speed</span>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+  const segs = [
+    [[40,60],[500,60]],[[500,60],[500,380]],
+    [[500,380],[40,380]],[[40,380],[40,60]],
+    [[140,140],[260,140]],[[260,140],[260,260]]
+  ];
+  const wallsG=document.getElementById('walls');
+  segs.forEach(s=>{const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1',s[0][0]); l.setAttribute('y1',s[0][1]);
+    l.setAttribute('x2',s[1][0]); l.setAttribute('y2',s[1][1]); wallsG.appendChild(l);});
+  function rayHit(o,d,s){const [ax,ay]=s[0],[bx,by]=s[1]; const ex=bx-ax, ey=by-ay;
+    const den=d[0]*(-ey)-d[1]*(-ex); if(Math.abs(den)<1e-9) return Infinity;
+    const t=((ax-o[0])*(-ey)-(ay-o[1])*(-ex))/den;
+    const u=(d[0]*(ay-o[1])-d[1]*(ax-o[0]))/den;
+    return (t>=0&&u>=0&&u<=1)?t:Infinity;}
+  const sensor=document.getElementById('sensor'), active=document.getElementById('active');
+  const raysG=document.getElementById('rays'), hitsG=document.getElementById('hits');
+  const cx=270, cy=240;
+  // pre-compute all 360 rays
+  const N=120;
+  const dirs=[]; for(let k=0;k<N;k++) dirs.push(k*2*Math.PI/N);
+  // accumulate seen hits gradually
+  let cur=0; let playing=true;
+  const speed=document.getElementById('speed'); const play=document.getElementById('play');
+  play.addEventListener('click', ()=>{playing=!playing; play.textContent=playing?'Pause':'Play';});
+  function step(){
+    if(!playing){ requestAnimationFrame(step); return; }
+    const adv = parseInt(speed.value);
+    for(let k=0;k<adv;k++){
+      const a=dirs[cur%N];
+      const d=[Math.cos(a),Math.sin(a)]; let tBest=Infinity;
+      segs.forEach(s=>{const t=rayHit([cx,cy],d,s); if(t<tBest) tBest=t;});
+      if(isFinite(tBest)){
+        const ex=cx+tBest*d[0], ey=cy+tBest*d[1];
+        const ln=document.createElementNS('http://www.w3.org/2000/svg','line');
+        ln.setAttribute('x1',cx); ln.setAttribute('y1',cy);
+        ln.setAttribute('x2',ex); ln.setAttribute('y2',ey);
+        ln.setAttribute('stroke','#7b2cbf'); ln.setAttribute('stroke-opacity','0.18'); ln.setAttribute('stroke-width','1');
+        raysG.appendChild(ln);
+        const dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+        dot.setAttribute('cx',ex); dot.setAttribute('cy',ey); dot.setAttribute('r',2.2);
+        dot.setAttribute('fill','#ef4444'); hitsG.appendChild(dot);
+        if(k===adv-1){ active.setAttribute('x1',cx); active.setAttribute('y1',cy);
+          active.setAttribute('x2',ex); active.setAttribute('y2',ey);}
+      }
+      cur++;
+      if(cur%N===0){ raysG.innerHTML=''; hitsG.innerHTML=''; }
+    }
+    requestAnimationFrame(step);
+  }
+  step();
+})();
+</script>
+
+</body>
+</html>

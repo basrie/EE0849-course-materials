@@ -1,138 +1,147 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta name="robots" content="noindex,nofollow,noarchive">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
   <title>EE0849 Course Materials</title>
   <style>
-    :root {
-      color-scheme: light;
-      --bg: #f7f8fb;
-      --panel: #ffffff;
-      --text: #17202a;
-      --muted: #5d6978;
-      --line: #d9dee7;
-      --accent: #0f766e;
-      --accent-dark: #115e59;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.5;
-    }
-
-    header {
-      background: #17202a;
-      color: #ffffff;
-      padding: 32px 20px 28px;
-    }
-
-    .wrap {
-      max-width: 980px;
-      margin: 0 auto;
-    }
-
-    h1 {
-      margin: 0 0 8px;
-      font-size: clamp(2rem, 6vw, 3.2rem);
-      line-height: 1.05;
-      letter-spacing: 0;
-    }
-
-    .term {
-      margin: 0;
-      color: #d4dde8;
-      font-size: 1rem;
-    }
-
-    main {
-      padding: 24px 20px 40px;
-    }
-
-    .notice {
-      background: #eef8f6;
-      border: 1px solid #b8ddd7;
-      border-radius: 8px;
-      color: #124d48;
-      margin-bottom: 20px;
-      padding: 14px 16px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-    }
-
-    .week {
-      display: flex;
-      min-height: 118px;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 14px;
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-      color: inherit;
-      text-decoration: none;
-      transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
-    }
-
-    .week:hover,
-    .week:focus-visible {
-      border-color: var(--accent);
-      box-shadow: 0 8px 24px rgba(15, 118, 110, 0.12);
-      outline: none;
-      transform: translateY(-1px);
-    }
-
-    .week strong {
-      display: block;
-      font-size: 1.05rem;
-    }
-
-    .week span {
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    footer {
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 0.92rem;
-      padding: 22px 20px;
-    }
+    body { margin:0; font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+           background:#f7f8fb; color:#17202a; }
+    header { background:#17202a; color:#fff; padding:28px 20px; }
+    header p { margin:6px 0 0; color:#c7d0da; }
+    main { max-width:960px; margin:0 auto; padding:24px 20px 48px; }
+    section { background:#fff; border:1px solid #d9dee7; border-radius:12px;
+              padding:16px 20px; margin-bottom:14px; }
+    h1 { margin:0; font-size:24px; }
+    h2 { margin:0 0 10px; font-size:16px; color:#0f766e; }
+    ul { margin:0; padding-left:20px; }
+    li { margin:5px 0; }
+    a { color:#0f766e; }
   </style>
 </head>
 <body>
   <header>
-    <div class="wrap">
-      <h1>EE0849 Course Materials</h1>
-      <p class="term">Introduction to Robotics, 2025-2026</p>
-    </div>
+    <h1>EE0849 Course Materials</h1>
+    <p>Introduction to Robotics &middot; 2025-2026</p>
   </header>
-  <main class="wrap">
-    <p class="notice">Trial publishing page for student-facing rendered materials.</p>
-    <p class="notice"><a href="course-links/">Open the CATS-style course links page</a></p>
-    <section class="grid" aria-label="Weekly materials">
-      <a class="week" href="W01_introduction-spatial-descriptions/"><strong>Week 01</strong><span>Introduction and spatial descriptions</span></a>
-      <a class="week" href="W02_homogeneous-transformations/"><strong>Week 02</strong><span>Homogeneous transformations</span></a>
-      <a class="week" href="W03_forward-kinematics-dh/"><strong>Week 03</strong><span>Forward kinematics and DH</span></a>
-      <a class="week" href="W04_analytical-inverse-kinematics/"><strong>Week 04</strong><span>Analytical inverse kinematics</span></a>
-      <a class="week" href="W05_numerical-inverse-kinematics/"><strong>Week 05</strong><span>Numerical inverse kinematics</span></a>
-    </section>
+  <main>
+      <section>
+        <h2>Weeks</h2>
+        <ul>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/assets/code/orientation_interactive.html">orientation interactive</a></li>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/assets/code/representing_rotation_interactive.html">representing rotation interactive</a></li>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/assets/code/rotation_matrix_elements_interactive.html">rotation matrix elements interactive</a></li>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/assets/code/rotation_x_interactive.html">rotation x interactive</a></li>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/assets/code/rotation_y_interactive.html">rotation y interactive</a></li>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/assets/code/rotation_z_interactive.html">rotation z interactive</a></li>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W01_introduction-spatial-descriptions/theory/study_sheet.pdf">study sheet</a></li>
+        <li><a href="weeks/W02_homogeneous-transformations/assets/code/rotation_matrix_elements_interactive.html">rotation matrix elements interactive</a></li>
+        <li><a href="weeks/W02_homogeneous-transformations/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W02_homogeneous-transformations/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W02_homogeneous-transformations/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W02_homogeneous-transformations/theory/study_sheet.pdf">study sheet</a></li>
+        <li><a href="weeks/W03_forward-kinematics-dh/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W03_forward-kinematics-dh/theory/dh_examples.html">dh examples</a></li>
+        <li><a href="weeks/W03_forward-kinematics-dh/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W03_forward-kinematics-dh/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W04_analytical-inverse-kinematics/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W04_analytical-inverse-kinematics/theory/ik_practice.html">ik practice</a></li>
+        <li><a href="weeks/W04_analytical-inverse-kinematics/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W04_analytical-inverse-kinematics/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W05_numerical-inverse-kinematics/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W05_numerical-inverse-kinematics/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W05_numerical-inverse-kinematics/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W05_velocity-kinematics-jacobian/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W05_velocity-kinematics-jacobian/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W05_velocity-kinematics-jacobian/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W06_trajectory-generation/assets/images/slerp_comparison_interactive.html">slerp comparison interactive</a></li>
+        <li><a href="weeks/W06_trajectory-generation/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W06_trajectory-generation/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W06_trajectory-generation/theory/quaternion_basics.pdf">quaternion basics</a></li>
+        <li><a href="weeks/W06_trajectory-generation/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W06_trajectory-generation/theory/study_sheet.pdf">study sheet</a></li>
+        <li><a href="weeks/W07_industrial-sensors-logic/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W07_industrial-sensors-logic/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W07_industrial-sensors-logic/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W08_calibration-advanced-tp/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W08_calibration-advanced-tp/lab/lab_roboguide.pdf">lab roboguide</a></li>
+        <li><a href="weeks/W08_calibration-advanced-tp/lab/lab_vision.pdf">lab vision</a></li>
+        <li><a href="weeks/W08_calibration-advanced-tp/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W08_calibration-advanced-tp/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W08_digital-twinning-calibration/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W09_mobile-robot-kinematics/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W09_mobile-robot-kinematics/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W09_mobile-robot-kinematics/theory/study_sheet.pdf">study sheet</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/blind_robot.html">blind robot</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/bresenham_grid.html">bresenham grid</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/camera_projection.html">camera projection</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/color_threshold_pipeline.html">color threshold pipeline</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/full_pipeline.html">full pipeline</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/full_scan_raycasting.html">full scan raycasting</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/grid_to_path.html">grid to path</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/image_vs_world_frame.html">image vs world frame</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/lidar_2d_scan.html">lidar 2d scan</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/lidar_limitations.html">lidar limitations</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/lidar_polar_plot.html">lidar polar plot</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/lidar_tof.html">lidar tof</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/multi_scan_grid.html">multi scan grid</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/occupancy_grid_concept.html">occupancy grid concept</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/polar_to_cartesian.html">polar to cartesian</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/practice_grid_solution.html">practice grid solution</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/ray_casting_single.html">ray casting single</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/sense_plan_act.html">sense plan act</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/sensor_noise_problem.html">sensor noise problem</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/assets/images_html/sigmoid_logodds.html">sigmoid logodds</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/lab/lab9_prelab_guide.pdf">lab9 prelab guide</a></li>
+        <li><a href="weeks/W10_sensors-autonomy/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W11_path-planning-grid-search/lab/lab.pdf">lab</a></li>
+        <li><a href="weeks/W11_path-planning-grid-search/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W12_path-planning-sampling/theory/slides.html">slides</a></li>
+        <li><a href="weeks/W13_localization-particle-filter/theory/notes.pdf">notes</a></li>
+        <li><a href="weeks/W13_localization-particle-filter/theory/slides.html">slides</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Projects</h2>
+        <ul>
+        <li><a href="projects/stewart_platform_ik/slides.html">slides</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Resources</h2>
+        <ul>
+        <li><a href="resources/docs/fanuc_reference/fanuc_quick_reference.pdf">fanuc quick reference</a></li>
+        <li><a href="resources/docs/fanuc_tp_cheatsheet.pdf">fanuc tp cheatsheet</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Week 3 Forward Kinematics Dh</h2>
+        <ul>
+        <li><a href="W03_forward-kinematics-dh/W03_forward-kinematics-dh_lab2_dh_forward_kinematics.ipynb">W03 forward-kinematics-dh lab2 dh forward kinematics</a></li>
+        <li><a href="W03_forward-kinematics-dh/lab.pdf">lab</a></li>
+        <li><a href="W03_forward-kinematics-dh/notes.pdf">notes</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Week 2 Homogeneous Transformations</h2>
+        <ul>
+        <li><a href="W02_homogeneous-transformations/W02_homogeneous-transformations_lab1_transform_calculator.ipynb">W02 homogeneous-transformations lab1 transform calculator</a></li>
+        <li><a href="W02_homogeneous-transformations/W02_homogeneous-transformations_spatialmath_cheatsheet.ipynb">W02 homogeneous-transformations spatialmath cheatsheet</a></li>
+        </ul>
+      </section>
+      <section>
+        <h2>Week 4 Analytical Inverse Kinematics</h2>
+        <ul>
+        <li><a href="W04_analytical-inverse-kinematics/W04_analytical-inverse-kinematics_lab3_geometric_ik.ipynb">W04 analytical-inverse-kinematics lab3 geometric ik</a></li>
+        <li><a href="W04_analytical-inverse-kinematics/lab.pdf">lab</a></li>
+        <li><a href="W04_analytical-inverse-kinematics/notes.pdf">notes</a></li>
+        </ul>
+      </section>
   </main>
-  <footer>
-    <div class="wrap">Published from rendered course materials. Source files remain in the private course repository.</div>
-  </footer>
 </body>
 </html>

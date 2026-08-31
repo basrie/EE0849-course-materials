@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 280">
+  <rect width="700" height="280" fill="#fafafa"/>
+
+  <text x="350" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">Python to FANUC Workflow</text>
+
+  <!-- Step 1: Python Model -->
+  <g transform="translate(30, 55)">
+    <rect x="0" y="0" width="130" height="100" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+    <text x="65" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1e40af">1. Python Model</text>
+    <text x="65" y="45" text-anchor="middle" font-family="monospace" font-size="8" fill="#3b82f6">robot = DHRobot(...)</text>
+    <text x="65" y="60" text-anchor="middle" font-family="monospace" font-size="8" fill="#3b82f6">T = SE3.Trans(...)</text>
+    <text x="65" y="75" text-anchor="middle" font-family="monospace" font-size="8" fill="#3b82f6">q = robot.ikine(T)</text>
+    <text x="65" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#666">Calculate joint angles</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <g transform="translate(165, 95)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#333" stroke-width="2"/>
+    <polygon points="40,0 32,-5 32,5" fill="#333"/>
+  </g>
+
+  <!-- Step 2: Export/Transfer -->
+  <g transform="translate(210, 55)">
+    <rect x="0" y="0" width="130" height="100" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="65" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#92400e">2. Transfer</text>
+    <text x="65" y="45" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#f59e0b">• Manual entry</text>
+    <text x="65" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#f59e0b">• CSV file</text>
+    <text x="65" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#f59e0b">• Network (advanced)</text>
+    <text x="65" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#666">Send to controller</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <g transform="translate(345, 95)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#333" stroke-width="2"/>
+    <polygon points="40,0 32,-5 32,5" fill="#333"/>
+  </g>
+
+  <!-- Step 3: FANUC Execute -->
+  <g transform="translate(390, 55)">
+    <rect x="0" y="0" width="130" height="100" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="65" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#166534">3. Execute</text>
+    <text x="65" y="45" text-anchor="middle" font-family="monospace" font-size="8" fill="#22c55e">J PR[1] 100% FINE</text>
+    <text x="65" y="60" text-anchor="middle" font-family="monospace" font-size="8" fill="#22c55e">J PR[2] 100% FINE</text>
+    <text x="65" y="75" text-anchor="middle" font-family="monospace" font-size="8" fill="#22c55e">...</text>
+    <text x="65" y="92" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#666">Robot moves to positions</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <g transform="translate(525, 95)">
+    <line x1="0" y1="0" x2="40" y2="0" stroke="#333" stroke-width="2"/>
+    <polygon points="40,0 32,-5 32,5" fill="#333"/>
+  </g>
+
+  <!-- Step 4: Validate -->
+  <g transform="translate(570, 55)">
+    <rect x="0" y="0" width="100" height="100" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="50" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#4338ca">4. Validate</text>
+    <text x="50" y="50" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#6366f1">Compare:</text>
+    <text x="50" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#6366f1">Expected TCP</text>
+    <text x="50" y="78" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#6366f1">vs</text>
+    <text x="50" y="91" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#6366f1">Actual TCP</text>
+  </g>
+
+  <!-- Feedback loop -->
+  <path d="M 620 165 L 620 200 L 95 200 L 95 165" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <polygon points="95,165 90,175 100,175" fill="#ef4444"/>
+  <text x="350" y="218" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#ef4444">If error too large: refine model or recalibrate</text>
+
+  <!-- Error analysis box -->
+  <g transform="translate(200, 235)">
+    <rect x="0" y="0" width="300" height="35" rx="5" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="150" y="15" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#333">Error = √[(ΔX)² + (ΔY)² + (ΔZ)²]</text>
+    <text x="150" y="28" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Typical uncalibrated error: 0.5 - 2 mm</text>
+  </g>
+</svg>

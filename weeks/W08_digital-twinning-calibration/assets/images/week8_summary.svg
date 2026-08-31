@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 380">
+  <rect width="650" height="380" fill="#fafafa"/>
+
+  <text x="325" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#333">Week 8: Digital Twinning & Calibration Summary</text>
+
+  <!-- Accuracy vs Repeatability -->
+  <g transform="translate(20, 50)">
+    <rect x="0" y="0" width="190" height="140" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+    <text x="95" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#1e40af">Accuracy vs Repeatability</text>
+
+    <text x="15" y="50" font-family="Arial, sans-serif" font-size="10" fill="#333">Accuracy:</text>
+    <text x="20" y="65" font-family="Arial, sans-serif" font-size="9" fill="#666">• Distance to target</text>
+    <text x="20" y="78" font-family="Arial, sans-serif" font-size="9" fill="#666">• ±0.5 to ±2.0 mm</text>
+
+    <text x="15" y="98" font-family="Arial, sans-serif" font-size="10" fill="#333">Repeatability:</text>
+    <text x="20" y="113" font-family="Arial, sans-serif" font-size="9" fill="#666">• Consistency returning</text>
+    <text x="20" y="126" font-family="Arial, sans-serif" font-size="9" fill="#666">• ±0.02 to ±0.08 mm</text>
+  </g>
+
+  <!-- Error Sources -->
+  <g transform="translate(230, 50)">
+    <rect x="0" y="0" width="190" height="140" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2"/>
+    <text x="95" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#166534">Error Sources</text>
+
+    <text x="15" y="50" font-family="Arial, sans-serif" font-size="9" fill="#333">• Geometric (link lengths)</text>
+    <text x="15" y="68" font-family="Arial, sans-serif" font-size="9" fill="#333">• Gear backlash</text>
+    <text x="15" y="86" font-family="Arial, sans-serif" font-size="9" fill="#333">• Compliance (deflection)</text>
+    <text x="15" y="104" font-family="Arial, sans-serif" font-size="9" fill="#333">• Thermal expansion</text>
+    <text x="15" y="122" font-family="Arial, sans-serif" font-size="9" fill="#333">• Servo errors</text>
+  </g>
+
+  <!-- Calibration -->
+  <g transform="translate(440, 50)">
+    <rect x="0" y="0" width="190" height="140" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+    <text x="95" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#92400e">Calibration Methods</text>
+
+    <text x="15" y="50" font-family="Arial, sans-serif" font-size="10" fill="#333">Mastering:</text>
+    <text x="20" y="65" font-family="Arial, sans-serif" font-size="9" fill="#666">Joint zero positions</text>
+
+    <text x="15" y="85" font-family="Arial, sans-serif" font-size="10" fill="#333">TCP (4-Point):</text>
+    <text x="20" y="100" font-family="Arial, sans-serif" font-size="9" fill="#666">Tool center point offset</text>
+
+    <text x="15" y="120" font-family="Arial, sans-serif" font-size="10" fill="#333">Full Calibration:</text>
+    <text x="20" y="135" font-family="Arial, sans-serif" font-size="9" fill="#666">All kinematic parameters</text>
+  </g>
+
+  <!-- World Zones -->
+  <g transform="translate(20, 205)">
+    <rect x="0" y="0" width="190" height="110" rx="8" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+    <text x="95" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#991b1b">World Zones</text>
+
+    <text x="15" y="50" font-family="Arial, sans-serif" font-size="9" fill="#333">• Safe zones (stay inside)</text>
+    <text x="15" y="68" font-family="Arial, sans-serif" font-size="9" fill="#333">• Forbidden zones (stay out)</text>
+    <text x="15" y="86" font-family="Arial, sans-serif" font-size="9" fill="#333">• Soft joint limits</text>
+    <text x="15" y="104" font-family="Arial, sans-serif" font-size="9" fill="#666">Violation → Stop + Signal</text>
+  </g>
+
+  <!-- Digital Twin Workflow -->
+  <g transform="translate(230, 205)">
+    <rect x="0" y="0" width="400" height="110" rx="8" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="200" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#4338ca">Digital Twin Workflow</text>
+
+    <!-- Mini workflow -->
+    <rect x="20" y="45" width="70" height="40" rx="4" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+    <text x="55" y="63" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#1e40af">Python IK</text>
+    <text x="55" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#3b82f6">Calculate q</text>
+
+    <line x1="95" y1="65" x2="115" y2="65" stroke="#333" stroke-width="1.5"/>
+    <polygon points="115,65 110,62 110,68" fill="#333"/>
+
+    <rect x="120" y="45" width="70" height="40" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+    <text x="155" y="63" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#92400e">Transfer</text>
+    <text x="155" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#f59e0b">PR registers</text>
+
+    <line x1="195" y1="65" x2="215" y2="65" stroke="#333" stroke-width="1.5"/>
+    <polygon points="215,65 210,62 210,68" fill="#333"/>
+
+    <rect x="220" y="45" width="70" height="40" rx="4" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+    <text x="255" y="63" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#166534">Execute</text>
+    <text x="255" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#22c55e">Move robot</text>
+
+    <line x1="295" y1="65" x2="315" y2="65" stroke="#333" stroke-width="1.5"/>
+    <polygon points="315,65 310,62 310,68" fill="#333"/>
+
+    <rect x="320" y="45" width="60" height="40" rx="4" fill="#e0e7ff" stroke="#6366f1" stroke-width="1"/>
+    <text x="350" y="63" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#4338ca">Validate</text>
+    <text x="350" y="75" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#6366f1">Compare</text>
+
+    <text x="200" y="102" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Goal: Minimize simulation-to-reality error</text>
+  </g>
+
+  <!-- Lab 7 -->
+  <text x="325" y="340" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#333">Lab 7: Python-to-Real Transfer</text>
+  <text x="325" y="358" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Calculate positions in Python → Execute on FANUC → Measure error</text>
+</svg>

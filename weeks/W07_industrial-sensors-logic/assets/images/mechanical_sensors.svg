@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 220">
+  <rect width="500" height="220" fill="#fafafa"/>
+
+  <text x="250" y="22" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Mechanical Sensors</text>
+
+  <!-- Limit Switch -->
+  <g transform="translate(20, 45)">
+    <rect x="0" y="0" width="145" height="150" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="72" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#92400e">Limit Switch</text>
+
+    <!-- Switch body -->
+    <rect x="45" y="40" width="55" height="35" rx="3" fill="#64748b" stroke="#475569"/>
+
+    <!-- Lever arm -->
+    <line x1="100" y1="57" x2="125" y2="45" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="125" cy="45" r="5" fill="#f59e0b"/>
+
+    <!-- Contacts -->
+    <circle cx="55" cy="90" r="3" fill="#333"/>
+    <circle cx="90" cy="90" r="3" fill="#333"/>
+    <path d="M 58 90 L 72 83 L 87 90" stroke="#333" stroke-width="2" fill="none"/>
+
+    <text x="72" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Physical contact</text>
+    <text x="72" y="128" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Very reliable</text>
+    <text x="72" y="141" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">End-of-travel detection</text>
+  </g>
+
+  <!-- Pressure Switch -->
+  <g transform="translate(178, 45)">
+    <rect x="0" y="0" width="145" height="150" rx="6" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="72" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1e40af">Pressure Switch</text>
+
+    <!-- Switch body -->
+    <rect x="40" y="40" width="65" height="45" rx="5" fill="#64748b" stroke="#475569"/>
+
+    <!-- Pressure port -->
+    <rect x="65" y="85" width="15" height="20" fill="#475569"/>
+    <text x="72" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#666">Pneumatic</text>
+
+    <!-- Gauge indicator -->
+    <circle cx="72" cy="58" r="12" fill="white" stroke="#333"/>
+    <line x1="72" y1="58" x2="72" y2="50" stroke="#ef4444" stroke-width="2"/>
+
+    <text x="72" y="130" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Monitors air pressure</text>
+    <text x="72" y="143" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Confirms gripper force</text>
+  </g>
+
+  <!-- Vacuum Switch -->
+  <g transform="translate(335, 45)">
+    <rect x="0" y="0" width="145" height="150" rx="6" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+    <text x="72" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#166534">Vacuum Switch</text>
+
+    <!-- Switch body -->
+    <rect x="40" y="40" width="65" height="45" rx="5" fill="#64748b" stroke="#475569"/>
+
+    <!-- Vacuum port -->
+    <rect x="65" y="85" width="15" height="20" fill="#475569"/>
+
+    <!-- Suction cup -->
+    <ellipse cx="72" cy="115" rx="20" ry="8" fill="#f97316" stroke="#ea580c"/>
+    <rect x="67" y="105" width="10" height="10" fill="#f97316"/>
+
+    <!-- Vacuum indicator -->
+    <text x="72" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="white">VAC</text>
+    <text x="72" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="7" fill="#22c55e">OK</text>
+
+    <text x="72" y="138" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Confirms suction grip</text>
+    <text x="72" y="151" text-anchor="middle" font-family="Arial, sans-serif" font-size="9" fill="#666">Critical for pick ops</text>
+  </g>
+
+  <text x="250" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#666">Mechanical sensors provide reliable confirmation of physical states</text>
+</svg>

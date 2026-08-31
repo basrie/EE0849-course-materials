@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 420" width="380" height="420" font-family="Arial, sans-serif">
+  <defs>
+    <marker id="rayArrowA" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#ef4444"/>
+    </marker>
+    <marker id="rayArrowB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#a855f7"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="190" y="22" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e293b">Two scans — rays cross at (2, 2)</text>
+
+  <!-- Grid: 5x5, cell=60px, anchor (30, 40) -->
+  <!-- Col 0..4 : x = 30, 90, 150, 210, 270
+       Row 0 (bottom) y=280..340 ... Row 4 (top) y=40..100 -->
+
+  <!-- Unknown (default gray) cells -->
+  <g fill="#e2e8f0" stroke="#cbd5e1" stroke-width="0.8">
+    <rect x="30"  y="40"  width="60" height="60"/>   <!-- (0,4) -->
+    <rect x="90"  y="40"  width="60" height="60"/>   <!-- (1,4) -->
+    <rect x="210" y="40"  width="60" height="60"/>   <!-- (3,4) -->
+    <rect x="270" y="40"  width="60" height="60"/>   <!-- (4,4) -->
+    <rect x="30"  y="100" width="60" height="60"/>   <!-- (0,3) -->
+    <rect x="90"  y="100" width="60" height="60"/>   <!-- (1,3) -->
+    <rect x="210" y="100" width="60" height="60"/>   <!-- (3,3) -->
+    <rect x="270" y="100" width="60" height="60"/>   <!-- (4,3) -->
+    <rect x="270" y="160" width="60" height="60"/>   <!-- (4,2) occupied, overridden below -->
+    <rect x="30"  y="220" width="60" height="60"/>   <!-- (0,1) -->
+    <rect x="90"  y="220" width="60" height="60"/>   <!-- (1,1) -->
+    <rect x="210" y="220" width="60" height="60"/>   <!-- (3,1) -->
+    <rect x="270" y="220" width="60" height="60"/>   <!-- (4,1) -->
+    <rect x="30"  y="280" width="60" height="60"/>   <!-- (0,0) -->
+    <rect x="90"  y="280" width="60" height="60"/>   <!-- (1,0) -->
+    <rect x="210" y="280" width="60" height="60"/>   <!-- (3,0) -->
+    <rect x="270" y="280" width="60" height="60"/>   <!-- (4,0) -->
+  </g>
+
+  <!-- Free cells on Ray A (horizontal through row 2): (1,2), (3,2) -->
+  <!-- Free cells on Ray B (vertical through col 2): (2,1), (2,3) -->
+  <g fill="#dcfce7" stroke="#22c55e" stroke-width="1.2">
+    <rect x="90"  y="160" width="60" height="60"/>   <!-- (1,2) free -->
+    <rect x="210" y="160" width="60" height="60"/>   <!-- (3,2) free -->
+    <rect x="150" y="100" width="60" height="60"/>   <!-- (2,3) free -->
+    <rect x="150" y="220" width="60" height="60"/>   <!-- (2,1) free -->
+  </g>
+
+  <!-- Intersection cell (2,2) — double-free (strongest) — filled darker green -->
+  <rect x="150" y="160" width="60" height="60" fill="#86efac" stroke="#15803d" stroke-width="2"/>
+
+  <!-- Occupied endpoints: (4,2) and (2,4) -->
+  <g fill="#1e293b" stroke="#0f172a" stroke-width="1.4">
+    <rect x="270" y="160" width="60" height="60"/>   <!-- (4,2) occ -->
+    <rect x="150" y="40"  width="60" height="60"/>   <!-- (2,4) occ -->
+  </g>
+
+  <!-- Robot pose A at (0,2) and pose B at (2,0) -->
+  <rect x="30"  y="160" width="60" height="60" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.4"/>
+  <rect x="150" y="280" width="60" height="60" fill="#faf5ff" stroke="#a855f7" stroke-width="1.4"/>
+
+  <!-- Ray A: from robot A (0,2) center (60, 190) to near (4,2) center (295, 190) -->
+  <line x1="70" y1="190" x2="290" y2="190" stroke="#ef4444" stroke-width="2" opacity="0.85"
+        marker-end="url(#rayArrowA)"/>
+  <!-- Ray B: from robot B (2,0) center (180, 310) to near (2,4) center (180, 75) -->
+  <line x1="180" y1="300" x2="180" y2="78" stroke="#a855f7" stroke-width="2" opacity="0.85"
+        marker-end="url(#rayArrowB)"/>
+
+  <!-- Robot A marker (blue) -->
+  <circle cx="60" cy="190" r="9" fill="#3b82f6" stroke="#1e40af" stroke-width="1.2"/>
+  <text x="60" y="214" text-anchor="middle" font-size="9" fill="#1e40af" font-weight="bold">R_A</text>
+
+  <!-- Robot B marker (purple) -->
+  <circle cx="180" cy="310" r="9" fill="#a855f7" stroke="#6b21a8" stroke-width="1.2"/>
+  <text x="180" y="334" text-anchor="middle" font-size="9" fill="#6b21a8" font-weight="bold">R_B</text>
+
+  <!-- Intersection cell label -->
+  <text x="180" y="188" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">ℓ = −0.8</text>
+  <text x="180" y="204" text-anchor="middle" font-size="9" fill="#166534" font-style="italic">free × 2</text>
+
+  <!-- Occupied endpoint labels -->
+  <text x="300" y="188" text-anchor="middle" font-size="11" font-weight="bold" fill="#fef2f2">ℓ = +0.85</text>
+  <text x="300" y="204" text-anchor="middle" font-size="9"  fill="#fecaca">occupied</text>
+
+  <text x="180" y="68"  text-anchor="middle" font-size="11" font-weight="bold" fill="#fef2f2">ℓ = +0.85</text>
+  <text x="180" y="84"  text-anchor="middle" font-size="9"  fill="#fecaca">occupied</text>
+
+  <!-- Ray labels (in unknown cells so they don't collide) -->
+  <text x="240" y="144" text-anchor="middle" font-size="11" fill="#b91c1c" font-style="italic" font-weight="bold">Ray A</text>
+  <text x="240" y="254" text-anchor="middle" font-size="11" fill="#7e22ce" font-style="italic" font-weight="bold">Ray B</text>
+
+  <!-- Column labels (i, bottom axis) -->
+  <g font-size="10" fill="#64748b" text-anchor="middle">
+    <text x="60"  y="358">0</text>
+    <text x="120" y="358">1</text>
+    <text x="180" y="358">2</text>
+    <text x="240" y="358">3</text>
+    <text x="300" y="358">4</text>
+    <text x="180" y="372" font-style="italic">i (column)</text>
+  </g>
+
+  <!-- Row labels (j, left axis) -->
+  <g font-size="10" fill="#64748b" text-anchor="middle">
+    <text x="20" y="314">0</text>
+    <text x="20" y="254">1</text>
+    <text x="20" y="194">2</text>
+    <text x="20" y="134">3</text>
+    <text x="20" y="74">4</text>
+    <text x="14" y="44" font-style="italic">j</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(30, 395)" font-size="10" fill="#334155">
+    <rect x="0"   y="0" width="12" height="12" fill="#86efac" stroke="#15803d" stroke-width="1"/>
+    <text x="18"  y="10">free × 2</text>
+
+    <rect x="72"  y="0" width="12" height="12" fill="#dcfce7" stroke="#22c55e" stroke-width="1"/>
+    <text x="90"  y="10">free × 1</text>
+
+    <rect x="144" y="0" width="12" height="12" fill="#1e293b" stroke="#0f172a" stroke-width="1"/>
+    <text x="162" y="10">occupied</text>
+
+    <rect x="220" y="0" width="12" height="12" fill="#e2e8f0" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="238" y="10">unknown</text>
+  </g>
+</svg>

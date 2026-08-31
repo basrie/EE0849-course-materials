@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Single ray cast</title>
+<style>
+  :root {
+    --c-x: #d62828; --c-y: #2a9d3f; --c-z: #2f6ed3;
+    --c-vec: #7b2cbf; --c-hl: #f39c12; --c-world: #666666;
+    --c-free: #22c55e; --c-free-fill: #dcfce7;
+    --c-occ: #ef4444; --c-occ-fill: #fecaca;
+    --c-robot: #3b82f6; --c-robot-dark: #1e40af;
+    --c-panel: #fafafa; --c-brd: #e2e8f0;
+    --c-text: #1e293b; --c-muted: #64748b; --c-grid: #cbd5e1;
+  }
+  html, body {
+    margin: 0; padding: 0; background: white;
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    text-rendering: geometricPrecision;
+  }
+  .stage {
+    width: 100%; height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 8px; box-sizing: border-box;
+  }
+  .stage > svg, .stage > .container {
+    width: 100%; height: 100%; max-width: 820px; max-height: 100%;
+  }
+  svg { display: block; }
+  svg text { font-family: -apple-system, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  .controls {
+    display: flex; gap: 12px; align-items: center; justify-content: center;
+    padding: 6px 10px; font-size: 13px; color: var(--c-muted);
+  }
+  .controls input[type=range] { width: 220px; accent-color: #f39c12; }
+  .controls .pill {
+    background: var(--c-panel); border: 1px solid var(--c-brd);
+    border-radius: 999px; padding: 4px 10px;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+<div class="container" id="rc-root">
+  <svg viewBox="0 0 600 440" preserveAspectRatio="xMidYMid meet">
+    <defs>
+      <marker id="rcArr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+        <path d="M0,0 L8,3 L0,6 Z" fill="#7b2cbf"/>
+      </marker>
+    </defs>
+    <text x="300" y="22" text-anchor="middle" font-size="14" font-weight="bold" fill="#1e293b">Ray casting: closest intersection wins</text>
+    <text x="300" y="40" text-anchor="middle" font-size="11" fill="#64748b">drag the robot to recast the ray</text>
+    <!-- Walls -->
+    <g id="walls" stroke="#1e293b" stroke-width="3" stroke-linecap="round"></g>
+    <!-- Many candidate hit dots -->
+    <g id="hits"></g>
+    <!-- Cast ray -->
+    <line id="ray" stroke="#7b2cbf" stroke-width="2.5" marker-end="url(#rcArr)"/>
+    <!-- Robot -->
+    <circle id="robot" cx="120" cy="320" r="11" fill="#3b82f6" stroke="#1e40af" stroke-width="2" style="cursor:grab"/>
+    <line id="heading" stroke="#1e40af" stroke-width="2"/>
+    <text id="dLbl" font-size="13" font-weight="bold" fill="#7b2cbf"></text>
+    <text x="60" y="420" font-size="10" fill="#94a3b8">walls = line segments</text>
+    <text x="540" y="420" text-anchor="end" font-size="10" fill="#94a3b8">distance shown along ray</text>
+  </svg>
+  <div class="controls">
+    <span>Bearing &alpha;:</span>
+    <input id="bSlider" type="range" min="0" max="359" value="20">
+    <span class="pill" id="bVal">&alpha; = 20°</span>
+  </div>
+</div>
+</div>
+
+<script>
+(function(){
+  const segs = [
+    [[40,60],[560,60]],   // top
+    [[560,60],[560,380]], // right
+    [[560,380],[40,380]], // bottom
+    [[40,380],[40,60]],   // left
+    [[200,180],[380,180]],// L horizontal
+    [[380,180],[380,300]] // L vertical
+  ];
+  const wallsG = document.getElementById('walls');
+  segs.forEach(s=>{
+    const l=document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1',s[0][0]); l.setAttribute('y1',s[0][1]);
+    l.setAttribute('x2',s[1][0]); l.setAttribute('y2',s[1][1]);
+    wallsG.appendChild(l);
+  });
+  const robot=document.getElementById('robot'), heading=document.getElementById('heading');
+  const ray=document.getElementById('ray'), dLbl=document.getElementById('dLbl');
+  const hitsG=document.getElementById('hits');
+  const bS=document.getElementById('bSlider'), bV=document.getElementById('bVal');
+
+  function intersect(o, d, s){
+    const [x1,y1]=s[0], [x2,y2]=s[1];
+    const den = (-d[0])*(y2-y1) - (-d[1])*(x2-x1);
+    if(Math.abs(den)<1e-9) return Infinity;
+    const t = ((y2-y1)*(o[0]-x1) - (x2-x1)*(o[1]-y1)) / -den;
+    const u = ((-d[1])*(o[0]-x1) - (-d[0])*(o[1]-y1)) / -den * -1;
+    // Solve properly:
+    return null;
+  }
+  // Use simpler param form: ray P(t) = o + t*d, segment Q(u) = a + u*(b-a)
+  function rayHit(o, d, s){
+    const [ax,ay]=s[0], [bx,by]=s[1]; const ex=bx-ax, ey=by-ay;
+    const den = d[0]*(-ey) - d[1]*(-ex);
+    if(Math.abs(den)<1e-9) return Infinity;
+    const t = ((ax-o[0])*(-ey) - (ay-o[1])*(-ex))/den;
+    const u = (d[0]*(ay-o[1]) - d[1]*(ax-o[0]))/den;
+    if(t>=0 && u>=0 && u<=1) return t;
+    return Infinity;
+  }
+  function update(){
+    const cx=parseFloat(robot.getAttribute('cx')), cy=parseFloat(robot.getAttribute('cy'));
+    const a=parseFloat(bS.value)*Math.PI/180;
+    const d=[Math.cos(a), -Math.sin(a)];
+    let tBest=Infinity;
+    hitsG.innerHTML='';
+    segs.forEach(s=>{ const t=rayHit([cx,cy],d,s);
+      if(isFinite(t)){
+        const px=cx+t*d[0], py=cy+t*d[1];
+        const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+        c.setAttribute('cx',px); c.setAttribute('cy',py); c.setAttribute('r',4);
+        c.setAttribute('fill','#cbd5e1'); c.setAttribute('stroke','#94a3b8');
+        hitsG.appendChild(c);
+        if(t<tBest) tBest=t;
+      }
+    });
+    if(!isFinite(tBest)) tBest=600;
+    const ex=cx+tBest*d[0], ey=cy+tBest*d[1];
+    ray.setAttribute('x1',cx); ray.setAttribute('y1',cy);
+    ray.setAttribute('x2',ex); ray.setAttribute('y2',ey);
+    heading.setAttribute('x1',cx); heading.setAttribute('y1',cy);
+    heading.setAttribute('x2',cx+18*d[0]); heading.setAttribute('y2',cy+18*d[1]);
+    // best hit highlight
+    const hit=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    hit.setAttribute('cx',ex); hit.setAttribute('cy',ey); hit.setAttribute('r',6);
+    hit.setAttribute('fill','#f39c12'); hit.setAttribute('stroke','#fff'); hit.setAttribute('stroke-width','2');
+    hitsG.appendChild(hit);
+    dLbl.textContent='r = '+tBest.toFixed(1)+' px';
+    dLbl.setAttribute('x', (cx+ex)/2 + 8); dLbl.setAttribute('y', (cy+ey)/2 - 8);
+    bV.textContent='α = '+bS.value+'°';
+  }
+  bS.addEventListener('input', update);
+  // drag robot
+  const svg=document.querySelector('#rc-root svg');
+  let drag=false;
+  function pt(e){const r=svg.getBoundingClientRect(); return [(e.clientX-r.left)*600/r.width,(e.clientY-r.top)*440/r.height];}
+  robot.addEventListener('mousedown', ()=>{drag=true; robot.style.cursor='grabbing';});
+  window.addEventListener('mousemove', e=>{ if(!drag) return; const [x,y]=pt(e);
+    const xC=Math.max(60,Math.min(540,x)), yC=Math.max(80,Math.min(360,y));
+    robot.setAttribute('cx',xC); robot.setAttribute('cy',yC); update();});
+  window.addEventListener('mouseup', ()=>{drag=false; robot.style.cursor='grab';});
+  update();
+})();
+</script>
+
+</body>
+</html>
